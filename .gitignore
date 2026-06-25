@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.pnpm-store/
+.agents/
+.git-work/
+.publish/
+
+# Superseded static prototype assets retained locally
+/assets/
+/preview-desktop.png
+/preview-mobile.png
+
+.env
+.env.*
+!.env.example
+
+*.log
+.DS_Store
+Thumbs.db
