@@ -1,161 +1,115 @@
 import {
-  Activity,
-  BatteryCharging,
-  CircleDot,
-  Cog,
-  Fan,
-  Filter,
-  Gauge,
-  Move3d,
-  Orbit,
+  Award,
+  CircleGauge,
+  DraftingCompass,
+  Factory,
+  Globe2,
+  Microscope,
+  ScanLine,
   ShieldCheck,
-  SlidersHorizontal,
-  Sparkles,
-  TimerReset,
-  Truck,
-  Waypoints,
 } from "lucide-react";
+
+import brakingImage from "../assets/reference-redesign/braking-system.webp";
+import suspensionImage from "../assets/reference-redesign/suspension-parts.webp";
+import engineMountImage from "../assets/reference-redesign/engine-mounts.webp";
+import filtrationImage from "../assets/reference-redesign/filtration.webp";
+import steeringImage from "../assets/reference-redesign/steering-parts.webp";
+import drivetrainImage from "../assets/reference-redesign/drivetrain-parts.webp";
 
 export const navigation = [
   { label: "Home", href: "#top" },
-  { label: "About", href: "#about" },
-  { label: "Technology", href: "#technology" },
+  { label: "About Us", href: "#about" },
+  { label: "Our Technology", href: "#technology" },
   { label: "Products", href: "#products" },
   { label: "Quality", href: "#quality" },
-  { label: "Global Presence", href: "#global" },
+  { label: "Contact", href: "#contact" },
 ];
 
-export const technologySteps = [
+export const values = [
   {
-    number: "01",
-    title: "Engineering",
-    text: "Application-led design, simulation and tolerance analysis transform a requirement into an exact component specification.",
-    icon: Move3d,
+    title: "Premium Quality",
+    text: "We use the finest materials and strict quality control to ensure long-lasting performance.",
+    icon: Award,
   },
   {
-    number: "02",
-    title: "Materials",
-    text: "Every alloy, polymer and surface treatment is selected against load, thermal and lifecycle demands.",
-    icon: Sparkles,
+    title: "Engineered With Precision",
+    text: "Every part is designed and tested to meet or exceed OEM standards.",
+    icon: CircleGauge,
   },
   {
-    number: "03",
-    title: "Manufacturing",
-    text: "Precision machining and controlled production processes deliver repeatable geometry at scale.",
-    icon: Cog,
-  },
-  {
-    number: "04",
-    title: "Validation",
-    text: "Dimensional, fatigue, thermal and performance testing verify the result before release.",
+    title: "Reliability You Can Trust",
+    text: "Built for endurance and safety in the most demanding conditions.",
     icon: ShieldCheck,
+  },
+  {
+    title: "Built For Global Drivers",
+    text: "Proudly supplying high-performance parts to markets worldwide.",
+    icon: Globe2,
   },
 ];
 
 export const products = [
   {
-    title: "Braking Systems",
-    code: "BRK",
-    text: "Controlled stopping power, consistent pedal feel and long-term thermal stability.",
-    icon: CircleDot,
+    title: "Braking System",
+    text: "High-performance braking components for maximum safety.",
+    image: brakingImage,
   },
   {
     title: "Suspension Parts",
-    code: "SUS",
-    text: "Engineered ride control and predictable handling across demanding road conditions.",
-    icon: SlidersHorizontal,
+    text: "Built for stability, comfort, and superior control.",
+    image: suspensionImage,
   },
   {
-    title: "Steering Components",
-    code: "STR",
-    text: "Precise response and durable articulation for confident directional control.",
-    icon: Orbit,
-  },
-  {
-    title: "Engine Components",
-    code: "ENG",
-    text: "High-integrity components designed for pressure, heat and continuous duty.",
-    icon: Gauge,
+    title: "Engine Mounts",
+    text: "Reduce vibration. Improve performance.",
+    image: engineMountImage,
   },
   {
     title: "Filtration",
-    code: "FLT",
-    text: "Advanced media and sealing systems that protect critical vehicle systems.",
-    icon: Filter,
+    text: "Cleaner performance. Longer engine life.",
+    image: filtrationImage,
   },
   {
-    title: "Cooling Systems",
-    code: "CLG",
-    text: "Efficient thermal management built for stable performance and extended life.",
-    icon: Fan,
+    title: "Steering Parts",
+    text: "Precision steering components for perfect handling.",
+    image: steeringImage,
   },
   {
-    title: "Electrical Components",
-    code: "ELC",
-    text: "Reliable sensing, switching and power delivery for modern vehicle platforms.",
-    icon: BatteryCharging,
+    title: "Drivetrain Parts",
+    text: "Power transmission parts that go the extra mile.",
+    image: drivetrainImage,
+  },
+];
+
+export const technologySteps = [
+  {
+    number: "01",
+    title: "Engineering Definition",
+    text: "Fit, load, material and performance targets are translated into measurable product requirements.",
+    icon: DraftingCompass,
   },
   {
-    title: "Transmission Components",
-    code: "TRN",
-    text: "Precision power-transfer parts developed for smooth, durable operation.",
-    icon: Waypoints,
+    number: "02",
+    title: "Precision Manufacturing",
+    text: "Controlled machining and forming processes protect critical geometry and repeatability.",
+    icon: Factory,
+  },
+  {
+    number: "03",
+    title: "Dimensional Control",
+    text: "Critical interfaces are measured against engineering intent throughout production.",
+    icon: ScanLine,
+  },
+  {
+    number: "04",
+    title: "Performance Validation",
+    text: "Components are evaluated for durability, consistency and demanding real-world duty cycles.",
+    icon: Microscope,
   },
 ];
 
 export const qualityMetrics = [
-  { value: 100, suffix: "%", label: "End-of-line inspection coverage" },
-  { value: 8, suffix: "D", label: "Structured quality problem solving" },
-  { value: 24, suffix: "/7", label: "Production traceability" },
-  { value: 0, suffix: ".01", label: "Millimeter measurement capability" },
+  { value: 4, suffix: "", label: "Engineering validation gates" },
+  { value: 360, suffix: "°", label: "Process visibility" },
+  { value: 100, suffix: "%", label: "Critical-feature focus" },
 ];
-
-export const advantages = [
-  {
-    title: "Engineering Excellence",
-    text: "Components developed around real application loads, tolerances and lifecycle targets.",
-    icon: Activity,
-  },
-  {
-    title: "Agile Manufacturing",
-    text: "Responsive production planning without compromising process discipline.",
-    icon: TimerReset,
-  },
-  {
-    title: "Premium Materials",
-    text: "Material systems chosen for performance, consistency and service life.",
-    icon: Sparkles,
-  },
-  {
-    title: "Global Distribution",
-    text: "A supply mindset designed for international partners and diverse vehicle markets.",
-    icon: Truck,
-  },
-  {
-    title: "Reliable Performance",
-    text: "Repeatable performance through controlled geometry, surfaces and assembly.",
-    icon: Gauge,
-  },
-  {
-    title: "Trusted Quality",
-    text: "Documented controls and verification at every critical production stage.",
-    icon: ShieldCheck,
-  },
-];
-
-export const regions = [
-  { name: "North America", x: 19, y: 36 },
-  { name: "Europe", x: 49, y: 28 },
-  { name: "Middle East", x: 57, y: 43 },
-  { name: "Africa", x: 49, y: 58 },
-  { name: "Asia Pacific", x: 78, y: 43 },
-  { name: "South America", x: 31, y: 70 },
-];
-
-export const socialLinks = [
-  { label: "LinkedIn", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "YouTube", href: "#" },
-];
-
-export const footerProductLinks = products.slice(0, 5).map((product) => product.title);

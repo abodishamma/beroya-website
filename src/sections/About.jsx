@@ -1,69 +1,59 @@
-import { ArrowUpRight, Crosshair, Layers3, ShieldCheck } from "lucide-react";
-import Reveal from "../components/Reveal";
-import SectionHeading from "../components/SectionHeading";
-
-const pillars = [
-  {
-    icon: Crosshair,
-    title: "Precision",
-    text: "Tolerances are designed, controlled and verified—never assumed.",
-  },
-  {
-    icon: Layers3,
-    title: "Innovation",
-    text: "Materials and processes evolve around real performance demands.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Reliability",
-    text: "Every critical characteristic is protected by disciplined quality control.",
-  },
-];
+import { motion as Motion, useReducedMotion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import aboutImage from "../assets/reference-redesign/about-caliper-branded.webp";
 
 export default function About() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section className="section about" id="about">
-      <div className="container">
-        <SectionHeading
-          index="01"
-          eyebrow="The company"
-          title="Built for the standards"
-          accent="the road demands."
-          description="BEROYA is a premium automotive components manufacturer focused on the details that define long-term performance: material integrity, dimensional accuracy and process consistency."
+    <section className="about" id="about">
+      <div className="about__image">
+        <img
+          src={aboutImage}
+          alt="Close-up of a premium black performance brake caliper and disc"
+          width="1536"
+          height="1024"
+          loading="lazy"
         />
-
-        <div className="about__layout">
-          <Reveal className="about__manifesto">
-            <span className="micro-label">Our belief</span>
-            <blockquote>
-              “True quality is rarely seen. It is felt in every controlled stop,
-              every precise response and every kilometer of dependable operation.”
-            </blockquote>
-            <div className="about__signature">
-              <span />
-              <p>
-                BEROYA
-                <small>Precision in motion</small>
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="about__pillars">
-            {pillars.map((pillar, index) => {
-              const Icon = pillar.icon;
-              return (
-                <Reveal className="pillar-card" delay={index * 0.08} key={pillar.title}>
-                  <span className="pillar-card__index">0{index + 1}</span>
-                  <Icon aria-hidden="true" />
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.text}</p>
-                  <ArrowUpRight aria-hidden="true" className="pillar-card__arrow" />
-                </Reveal>
-              );
-            })}
-          </div>
+        <div className="about__image-meta">
+          <span>BEROYA / Braking Systems</span>
+          <strong>Engineered identity. Applied at source.</strong>
         </div>
       </div>
+
+      <Motion.div
+        className="about__content"
+        initial={reduceMotion ? false : { opacity: 0, x: 28 }}
+        whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span className="section-kicker">About BEROYA</span>
+        <h2>
+          Innovation in Every Detail.
+          <br />
+          Excellence in Every Part.
+        </h2>
+        <div className="gold-rule" />
+        <p>
+          BEROYA Auto Parts was founded with a clear mission: to manufacture
+          automotive parts that combine advanced engineering, durability, and
+          perfect fit.
+        </p>
+        <p>
+          From concept to production, every step is carried out with precision,
+          passion, and a commitment to delivering the best to our customers.
+        </p>
+        <div className="about__principles" aria-label="BEROYA manufacturing principles">
+          <span>Material discipline</span>
+          <span>Precision fit</span>
+          <span>Validated durability</span>
+        </div>
+        <a className="button button--outline" href="#technology">
+          Explore Our Engineering
+          <ArrowRight aria-hidden="true" size={17} />
+        </a>
+      </Motion.div>
     </section>
   );
 }

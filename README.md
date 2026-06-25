@@ -1,6 +1,7 @@
 # BEROYA Auto Parts
 
-Premium corporate website for BEROYA, built as a responsive React application.
+Premium corporate manufacturer website for BEROYA, built with React, Vite,
+Tailwind CSS, Framer Motion and Lucide React.
 
 ## Run locally
 
@@ -19,13 +20,28 @@ pnpm preview
 
 The optimized production output is written to `dist/`.
 
-## Launch checklist
+## Experience
 
-- Replace the clearly marked corporate email, telephone, and headquarters placeholders.
-- Connect the contact form to the preferred inbox, CRM, or form service.
-- Replace placeholder social and legal links with approved destinations.
-- Add the final production domain to the structured data and canonical metadata.
+- Cinematic responsive homepage for desktop, tablet and mobile
+- Factory-integrated BEROYA product branding
+- Engineering, product, quality and corporate contact sections
+- Functional email, telephone, location and internal navigation links
+- Reduced-motion support and keyboard-visible focus states
+- Optimized WebP imagery and production output in `dist/`
+
+## Corporate details
+
+Contact links currently use:
+
+- `info@beroyaauto.com`
+- `+971 50 123 4567`
+- Dubai, United Arab Emirates
+
+Update these values before launch if the company provides different official
+details.
 
 ## Brand assets
 
-The supplied BEROYA logo is used as provided. Supporting automotive imagery is original, logo-free, and optimized to WebP for the site.
+The supplied BEROYA logo is used throughout the identity system. Supporting
+automotive imagery is optimized for the site, including a branded caliper image
+where the mark is integrated into the product photography itself.

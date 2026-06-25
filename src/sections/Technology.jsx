@@ -30,7 +30,12 @@ export default function Technology() {
             />
             <div className="technology__caption">
               <span>Advanced manufacturing</span>
-              <small>Five-axis precision control</small>
+              <small>Controlled precision environment</small>
+            </div>
+            <div className="technology__signal" aria-hidden="true">
+              <span>Live process</span>
+              <i />
+              <b>± 0.01</b>
             </div>
             <div className="technology__reticle" aria-hidden="true">
               <i />

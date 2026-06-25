@@ -1,92 +1,142 @@
-import { motion as Motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import {
+  motion as Motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { ArrowDown, ArrowRight } from "lucide-react";
-import heroImage from "../assets/hero-braking.webp";
-import Reveal from "../components/Reveal";
+import heroImage from "../assets/reference-redesign/hero-components.webp";
+import brandMark from "../assets/beroya-mark-2026.png";
+
+const lineVariants = {
+  hidden: { opacity: 0, y: 34, filter: "blur(8px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+};
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
-  const { scrollY } = useScroll();
-  const imageY = useTransform(scrollY, [0, 900], [0, reduceMotion ? 0 : 80]);
-  const copyY = useTransform(scrollY, [0, 800], [0, reduceMotion ? 0 : 35]);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const imageX = useSpring(useTransform(pointerX, [-1, 1], [-12, 12]), {
+    stiffness: 90,
+    damping: 24,
+  });
+  const imageY = useSpring(useTransform(pointerY, [-1, 1], [-7, 7]), {
+    stiffness: 90,
+    damping: 24,
+  });
+  const markX = useSpring(useTransform(pointerX, [-1, 1], [8, -8]), {
+    stiffness: 70,
+    damping: 28,
+  });
+
+  const handlePointerMove = (event) => {
+    if (reduceMotion) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 2);
+    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 2);
+  };
+
+  const resetPointer = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   return (
-    <section className="hero" id="top" aria-labelledby="hero-title">
-      <Motion.div className="hero__media" style={{ y: imageY }} aria-hidden="true">
+    <section
+      className="hero"
+      id="top"
+      aria-labelledby="hero-title"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+    >
+      <Motion.div
+        className="hero__glow"
+        aria-hidden="true"
+        style={reduceMotion ? undefined : { x: imageX, y: imageY }}
+      />
+
+      <Motion.div
+        className="hero__monogram"
+        aria-hidden="true"
+        style={reduceMotion ? undefined : { x: markX }}
+        animate={
+          reduceMotion
+            ? undefined
+            : { y: [0, -11, 0], opacity: [0.06, 0.1, 0.06] }
+        }
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <img src={brandMark} alt="" width="219" height="420" />
+      </Motion.div>
+
+      <Motion.div
+        className="hero__image"
+        initial={reduceMotion ? false : { opacity: 0, x: 55, scale: 1.035 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 1.35, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+        style={reduceMotion ? undefined : { translateX: imageX, translateY: imageY }}
+      >
         <img
           src={heroImage}
-          alt=""
+          alt="Premium BEROYA braking, suspension and drivetrain components"
           width="1672"
           height="941"
           fetchPriority="high"
-          decoding="async"
         />
-        <div className="hero__scrim" />
       </Motion.div>
 
-      <div className="hero__grid" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
+      <div className="hero__meta" aria-hidden="true">
+        <span>BEROYA / 01</span>
+        <span>Precision automotive systems</span>
       </div>
 
-      <Motion.div className="hero__content container" style={{ y: copyY }}>
-        <Reveal className="hero__eyebrow" y={18}>
-          <span className="status-dot" />
-          Precision automotive components
-        </Reveal>
+      <div className="container hero__inner">
+        <Motion.div
+          className="hero__copy"
+          initial="hidden"
+          animate="visible"
+          transition={{ staggerChildren: 0.11, delayChildren: 0.13 }}
+        >
+          <Motion.span className="hero__eyebrow" variants={reduceMotion ? {} : lineVariants}>
+            Engineered for Performance
+          </Motion.span>
 
-        <h1 id="hero-title">
-          <Motion.span
-            initial={reduceMotion ? false : { y: "110%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          >
-            We don’t just
-          </Motion.span>
-          <Motion.span
-            initial={reduceMotion ? false : { y: "110%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.95, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          >
-            make parts.
-          </Motion.span>
-          <Motion.span
-            className="hero__accent"
-            initial={reduceMotion ? false : { y: "110%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.95, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
-          >
-            We build performance.
-          </Motion.span>
-        </h1>
+          <h1 id="hero-title">
+            {["We don’t just", "make parts,", "we build", "performance."].map((line) => (
+              <span className="hero__line" key={line}>
+                <Motion.span variants={reduceMotion ? {} : lineVariants}>
+                  {line}
+                </Motion.span>
+              </span>
+            ))}
+          </h1>
 
-        <Reveal className="hero__bottom" delay={0.48}>
-          <p>
-            Premium automotive components engineered with precision, manufactured
-            with discipline, and built to perform long after the road gets demanding.
-          </p>
-          <div className="hero__actions">
-            <a className="button button--solid" href="#products">
-              Discover our products
-              <ArrowRight aria-hidden="true" size={18} />
+          <Motion.div className="gold-rule" variants={reduceMotion ? {} : lineVariants} />
+
+          <Motion.p variants={reduceMotion ? {} : lineVariants}>
+            BEROYA Auto Parts is a premium manufacturer of high-quality automotive
+            components. Designed with precision. Built for reliability. Made to
+            exceed expectations.
+          </Motion.p>
+
+          <Motion.div className="hero__actions" variants={reduceMotion ? {} : lineVariants}>
+            <a className="button button--gold" href="#products">
+              Discover Our Products
+              <ArrowRight aria-hidden="true" size={17} />
             </a>
-            <a className="button button--ghost" href="#technology">
-              Our technology
+            <a className="button button--outline" href="#technology">
+              Our Technology
             </a>
-          </div>
-        </Reveal>
-      </Motion.div>
-
-      <div className="hero__spec" aria-hidden="true">
-        <span>System focus</span>
-        <strong>BRK / 01</strong>
-        <small>Thermal stability · precision control</small>
+          </Motion.div>
+        </Motion.div>
       </div>
 
-      <a className="hero__scroll" href="#about" aria-label="Scroll to company overview">
-        <span>Explore</span>
-        <ArrowDown aria-hidden="true" size={16} />
+      <a className="hero__scroll" href="#principles">
+        <span>Scroll to discover</span>
+        <i aria-hidden="true" />
+        <ArrowDown aria-hidden="true" size={14} />
       </a>
     </section>
   );

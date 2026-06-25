@@ -1,4 +1,4 @@
-import logo from "../assets/beroya-logo.jpg";
+import logo from "../assets/beroya-logo-2026.png";
 
 export default function Brand({ className = "", priority = false }) {
   return (
@@ -10,8 +10,8 @@ export default function Brand({ className = "", priority = false }) {
       <img
         src={logo}
         alt="BEROYA Auto Parts"
-        width="1063"
-        height="591"
+        width="853"
+        height="665"
         fetchPriority={priority ? "high" : "auto"}
       />
     </a>

@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import qualityImage from "../assets/quality-metrology.webp";
 import Counter from "../components/Counter";
 import Reveal from "../components/Reveal";
@@ -57,6 +57,13 @@ export default function Quality() {
           {qualityMetrics.map((metric) => (
             <Counter key={metric.label} {...metric} />
           ))}
+        </Reveal>
+
+        <Reveal className="quality__action" delay={0.24}>
+          <a href="mailto:info@beroyaauto.com?subject=BEROYA%20Quality%20and%20Technical%20Enquiry">
+            Discuss technical requirements
+            <ArrowUpRight aria-hidden="true" size={17} />
+          </a>
         </Reveal>
       </div>
     </section>

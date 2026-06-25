@@ -7,8 +7,8 @@ dist/
 
 # Superseded static prototype assets retained locally
 /assets/
-/preview-desktop.png
-/preview-mobile.png
+/preview-*.png
+/tmp-*.png
 
 .env
 .env.*

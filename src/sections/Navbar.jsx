@@ -2,72 +2,134 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion as Motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Brand from "../components/Brand";
-import ArrowLink from "../components/ArrowLink";
 import { navigation } from "../data/siteData";
 import { useScrolled } from "../hooks/useScrolled";
 
 export default function Navbar() {
-  const scrolled = useScrolled();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const scrolled = useScrolled(18);
   const reduceMotion = useReducedMotion();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("top");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", closeOnEscape);
     };
   }, [menuOpen]);
 
-  return (
-    <header className={`site-nav ${scrolled ? "site-nav--scrolled" : ""}`}>
-      <div className="nav-shell">
-        <Brand priority />
+  useEffect(() => {
+    const sectionIds = navigation.map((item) => item.href.slice(1));
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
 
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <a key={item.label} href={item.href}>
-              {item.label}
-            </a>
-          ))}
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target?.id) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-28% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
+
+  return (
+    <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
+      <div className="container nav">
+        <Brand className="nav__brand" priority />
+
+        <nav className="nav__links" aria-label="Primary navigation">
+          {navigation.map((item) => {
+            const id = item.href.slice(1);
+            const active = activeSection === id;
+            return (
+              <a
+                className={active ? "is-active" : ""}
+                href={item.href}
+                key={item.label}
+                aria-current={active ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
-        <ArrowLink href="#contact" variant="outline" className="nav-contact">
-          Start a conversation
-        </ArrowLink>
+        <a className="nav__cta" href="#contact">
+          <span>Get in Touch</span>
+          <i aria-hidden="true" />
+        </a>
 
         <button
-          className="menu-button"
+          className="nav__menu"
           type="button"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
         >
           {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </div>
 
+      <div className="site-header__progress" aria-hidden="true">
+        <span style={{ transform: `scaleX(${scrollProgress})` }} />
+      </div>
+
       <AnimatePresence>
         {menuOpen && (
           <Motion.div
-            className="mobile-menu"
-            initial={reduceMotion ? false : { opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.3 }}
+            className="mobile-nav"
+            id="mobile-navigation"
+            initial={reduceMotion ? false : { opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+            exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
             <nav aria-label="Mobile navigation">
               {navigation.map((item, index) => (
-                <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>
-                  <span>0{index + 1}</span>
+                <a
+                  href={item.href}
+                  key={item.label}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
                   {item.label}
                 </a>
               ))}
-              <a href="#contact" onClick={() => setMenuOpen(false)}>
-                <span>{String(navigation.length + 1).padStart(2, "0")}</span>
-                Contact
-              </a>
             </nav>
-            <p>Precision in every component. Performance in every journey.</p>
+            <a className="mobile-nav__cta" href="#contact" onClick={() => setMenuOpen(false)}>
+              Start a Conversation
+            </a>
           </Motion.div>
         )}
       </AnimatePresence>
