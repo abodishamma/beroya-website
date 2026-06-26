@@ -33,7 +33,7 @@ The optimized production output is written to `dist/`.
 
 Contact links currently use:
 
-- `info@beroyaauto.com`
+- `Abdulrahman.masri@beroyaauto.com`
 - `+971 50 123 4567`
 - Dubai, United Arab Emirates
 
