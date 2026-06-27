@@ -1,5 +1,10 @@
 import HomePage from "./pages/HomePage";
+import { LanguageProvider } from "./context/LanguageProvider";
 
 export default function App() {
-  return <HomePage />;
+  return (
+    <LanguageProvider>
+      <HomePage />
+    </LanguageProvider>
+  );
 }

@@ -8,6 +8,7 @@ import {
 import { ArrowDown, ArrowRight } from "lucide-react";
 import heroImage from "../assets/reference-redesign/hero-components.webp";
 import brandMark from "../assets/beroya-mark-2026.png";
+import { useLanguage } from "../hooks/useLanguage";
 
 const lineVariants = {
   hidden: { opacity: 0, y: 34, filter: "blur(8px)" },
@@ -15,6 +16,7 @@ const lineVariants = {
 };
 
 export default function Hero() {
+  const { content } = useLanguage();
   const reduceMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -95,17 +97,17 @@ export default function Hero() {
         <span className="hero__scan" aria-hidden="true" />
         <span className="hero__hotspot hero__hotspot--brake" aria-hidden="true">
           <i />
-          Braking
+          {content.hero.hotspots[0]}
         </span>
         <span className="hero__hotspot hero__hotspot--suspension" aria-hidden="true">
           <i />
-          Suspension
+          {content.hero.hotspots[1]}
         </span>
       </Motion.div>
 
       <div className="hero__meta" aria-hidden="true">
-        <span>BEROYA / 01</span>
-        <span>Precision automotive systems</span>
+        <span>{content.hero.meta[0]}</span>
+        <span>{content.hero.meta[1]}</span>
       </div>
 
       <div className="container hero__inner">
@@ -116,11 +118,11 @@ export default function Hero() {
           transition={{ staggerChildren: 0.11, delayChildren: 0.13 }}
         >
           <Motion.span className="hero__eyebrow" variants={reduceMotion ? {} : lineVariants}>
-            Engineered for Performance
+            {content.hero.eyebrow}
           </Motion.span>
 
           <h1 id="hero-title">
-            {["We don't just", "make parts,", "we build", "performance."].map((line) => (
+            {content.hero.lines.map((line) => (
               <span className="hero__line" key={line}>
                 <Motion.span variants={reduceMotion ? {} : lineVariants}>
                   {line}
@@ -132,30 +134,29 @@ export default function Hero() {
           <Motion.div className="gold-rule" variants={reduceMotion ? {} : lineVariants} />
 
           <Motion.p variants={reduceMotion ? {} : lineVariants}>
-            Premium automotive components engineered for precision, durability
-            and confident performance.
+            {content.hero.text}
           </Motion.p>
 
           <Motion.div className="hero__actions" variants={reduceMotion ? {} : lineVariants}>
             <a className="button button--gold" href="#products">
-              View Products
+              {content.hero.primary}
               <ArrowRight aria-hidden="true" size={17} />
             </a>
             <a className="button button--outline" href="#technology">
-              Technology
+              {content.hero.secondary}
             </a>
           </Motion.div>
 
           <Motion.div className="hero__proof" variants={reduceMotion ? {} : lineVariants}>
-            <span>Precision fit</span>
-            <span>Durability tested</span>
-            <span>Global supply</span>
+            {content.hero.proof.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
           </Motion.div>
         </Motion.div>
       </div>
 
       <a className="hero__scroll" href="#principles">
-        <span>Scroll to discover</span>
+        <span>{content.hero.scroll}</span>
         <i aria-hidden="true" />
         <ArrowDown aria-hidden="true" size={14} />
       </a>

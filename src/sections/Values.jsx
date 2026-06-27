@@ -1,8 +1,10 @@
 import { motion as Motion, useReducedMotion } from "framer-motion";
+import { useLanguage } from "../hooks/useLanguage";
 import { values } from "../data/siteData";
 import logo from "../assets/beroya-logo-2026.png";
 
 export default function Values() {
+  const { content } = useLanguage();
   const reduceMotion = useReducedMotion();
 
   return (
@@ -11,6 +13,7 @@ export default function Values() {
       <div className="container values__grid">
         {values.map((value, index) => {
           const Icon = value.icon;
+          const [title, text] = content.values[index];
           return (
             <Motion.article
               className="value"
@@ -29,8 +32,8 @@ export default function Values() {
               </span>
               <div>
                 <span className="value__index">{String(index + 1).padStart(2, "0")}</span>
-                <h2>{value.title}</h2>
-                <p>{value.text}</p>
+                <h2>{title}</h2>
+                <p>{text}</p>
               </div>
             </Motion.article>
           );

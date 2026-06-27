@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion as Motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Brand from "../components/Brand";
+import { useLanguage } from "../hooks/useLanguage";
 import { navigation } from "../data/siteData";
 import { useScrolled } from "../hooks/useScrolled";
 
 export default function Navbar() {
+  const { content, language, toggleLanguage } = useLanguage();
   const scrolled = useScrolled(18);
   const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -75,19 +77,32 @@ export default function Navbar() {
               <a
                 className={active ? "is-active" : ""}
                 href={item.href}
-                key={item.label}
+                key={item.key}
                 aria-current={active ? "page" : undefined}
               >
-                {item.label}
+                {content.nav[item.key]}
               </a>
             );
           })}
         </nav>
 
-        <a className="nav__cta" href="#contact">
-          <span>Get in Touch</span>
-          <i aria-hidden="true" />
-        </a>
+        <div className="nav__actions">
+          <button
+            className="language-toggle"
+            type="button"
+            aria-label={content.nav.aria}
+            onClick={toggleLanguage}
+          >
+            <span className={language === "en" ? "is-active" : ""}>EN</span>
+            <i aria-hidden="true" />
+            <span className={language === "ar" ? "is-active" : ""}>العربية</span>
+          </button>
+
+          <a className="nav__cta" href="#contact">
+            <span>{content.nav.cta}</span>
+            <i aria-hidden="true" />
+          </a>
+        </div>
 
         <button
           className="nav__menu"
@@ -119,16 +134,21 @@ export default function Navbar() {
               {navigation.map((item, index) => (
                 <a
                   href={item.href}
-                  key={item.label}
+                  key={item.key}
                   onClick={() => setMenuOpen(false)}
                 >
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  {item.label}
+                  {content.nav[item.key]}
                 </a>
               ))}
             </nav>
+            <button className="mobile-nav__language" type="button" onClick={toggleLanguage}>
+              EN
+              <i aria-hidden="true" />
+              العربية
+            </button>
             <a className="mobile-nav__cta" href="#contact" onClick={() => setMenuOpen(false)}>
-              Start a Conversation
+              {content.nav.mobileCta}
             </a>
           </Motion.div>
         )}

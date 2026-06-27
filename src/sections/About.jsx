@@ -1,8 +1,10 @@
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import aboutImage from "../assets/reference-redesign/about-caliper-branded.webp";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function About() {
+  const { content } = useLanguage();
   const reduceMotion = useReducedMotion();
 
   return (
@@ -16,8 +18,8 @@ export default function About() {
           loading="lazy"
         />
         <div className="about__image-meta">
-          <span>BEROYA / Braking Systems</span>
-          <strong>Brand built into the part.</strong>
+          <span>{content.about.meta[0]}</span>
+          <strong>{content.about.meta[1]}</strong>
         </div>
       </div>
 
@@ -28,24 +30,21 @@ export default function About() {
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
       >
-        <span className="section-kicker">About BEROYA</span>
+        <span className="section-kicker">{content.about.kicker}</span>
         <h2>
-          Innovation in Every Detail.
+          {content.about.title[0]}
           <br />
-          Excellence in Every Part.
+          {content.about.title[1]}
         </h2>
         <div className="gold-rule" />
-        <p>
-          BEROYA manufactures premium automotive components with disciplined
-          engineering, durable materials and precise fitment.
-        </p>
+        <p>{content.about.text}</p>
         <div className="about__principles" aria-label="BEROYA manufacturing principles">
-          <span>Material discipline</span>
-          <span>Precision fit</span>
-          <span>Validated durability</span>
+          {content.about.principles.map((principle) => (
+            <span key={principle}>{principle}</span>
+          ))}
         </div>
         <a className="button button--outline" href="#technology">
-          Our Engineering
+          {content.about.cta}
           <ArrowRight aria-hidden="true" size={17} />
         </a>
       </Motion.div>

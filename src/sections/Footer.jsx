@@ -1,61 +1,72 @@
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Brand from "../components/Brand";
+import { useLanguage } from "../hooks/useLanguage";
 
-const companyLinks = [
-  { label: "About BEROYA", href: "#about" },
-  { label: "Our Technology", href: "#technology" },
-  { label: "Quality Philosophy", href: "#quality" },
-  { label: "Contact", href: "#contact" },
-];
+const companyHrefs = ["#about", "#technology", "#manufacturing", "#quality", "#contact"];
 
-const productLinks = [
+const productSubjects = [
   "Braking System",
   "Suspension Parts",
   "Engine Mounts",
   "Filtration",
   "Steering Parts",
   "Drivetrain Parts",
-].map((label) => ({
-  label,
-  href: `mailto:info@beroyaauto.com?subject=${encodeURIComponent(`BEROYA ${label} Enquiry`)}`,
-}));
-
-const businessLinks = [
-  {
-    label: "Request Product Portfolio",
-    href: "mailto:info@beroyaauto.com?subject=BEROYA%20Product%20Portfolio%20Request",
-  },
-  {
-    label: "Distribution Partnerships",
-    href: "mailto:info@beroyaauto.com?subject=BEROYA%20Distribution%20Partnership",
-  },
-  {
-    label: "Careers",
-    href: "mailto:info@beroyaauto.com?subject=Careers%20at%20BEROYA",
-  },
 ];
+
+function mailSubject(subject) {
+  return `mailto:info@beroyaauto.com?subject=${encodeURIComponent(subject)}`;
+}
 
 function FooterLinks({ title, items }) {
   return (
     <div className="footer__column">
       <h2>{title}</h2>
-      {items.map((item) => (
-        <a href={item.href} key={item.label}>
-          {item.label}
-        </a>
-      ))}
+      {items.map((item) =>
+        item.href ? (
+          <a href={item.href} key={item.label}>
+            {item.label}
+          </a>
+        ) : (
+          <span key={item.label}>{item.label}</span>
+        ),
+      )}
     </div>
   );
 }
 
 export default function Footer() {
+  const { content } = useLanguage();
+
+  const companyLinks = content.footer.links.company.map((label, index) => ({
+    label,
+    href: companyHrefs[index],
+  }));
+
+  const productLinks = content.products.items.map(([label], index) => ({
+    label,
+    href: mailSubject(`BEROYA ${productSubjects[index]} Enquiry`),
+  }));
+
+  const businessLinks = content.footer.links.business.map((label, index) => ({
+    label,
+    href: [
+      mailSubject("BEROYA Product Portfolio Request"),
+      mailSubject("BEROYA Distribution Partnership"),
+      mailSubject("BEROYA Technical Enquiry"),
+    ][index],
+  }));
+
+  const certificationLinks = content.footer.links.certifications.map((label) => ({
+    label,
+  }));
+
   return (
     <footer className="footer">
       <div className="container footer__topline">
-        <span>BEROYA Auto Parts</span>
-        <span>Premium automotive components</span>
+        <span>{content.footer.topline[0]}</span>
+        <span>{content.footer.topline[1]}</span>
         <a href="#top">
-          Back to top
+          {content.footer.topline[2]}
           <ArrowUpRight aria-hidden="true" size={15} />
         </a>
       </div>
@@ -63,18 +74,27 @@ export default function Footer() {
       <div className="container footer__grid">
         <div className="footer__brand">
           <Brand />
-          <p>
-            Premium automotive components built with precision, durability and
-            brand discipline.
-          </p>
+          <p>{content.footer.description}</p>
+          <div className="footer__socials" aria-label="Social media">
+            <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
+              <Facebook aria-hidden="true" size={14} />
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <Instagram aria-hidden="true" size={14} />
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <Linkedin aria-hidden="true" size={14} />
+            </a>
+          </div>
         </div>
 
-        <FooterLinks title="Company" items={companyLinks} />
-        <FooterLinks title="Product Systems" items={productLinks} />
-        <FooterLinks title="Business" items={businessLinks} />
+        <FooterLinks title={content.footer.company} items={companyLinks} />
+        <FooterLinks title={content.footer.products} items={productLinks} />
+        <FooterLinks title={content.footer.business} items={businessLinks} />
+        <FooterLinks title={content.footer.support} items={certificationLinks} />
 
         <div className="footer__column footer__contact">
-          <h2>Corporate Office</h2>
+          <h2>{content.footer.contact}</h2>
           <a href="tel:+971501234567">
             <Phone aria-hidden="true" size={15} />
             +971 50 123 4567
@@ -89,17 +109,19 @@ export default function Footer() {
             rel="noreferrer"
           >
             <MapPin aria-hidden="true" size={16} />
-            Dubai, United Arab Emirates
+            {content.contact.location[1]}
           </a>
         </div>
       </div>
 
       <div className="container footer__bottom">
-        <p>© {new Date().getFullYear()} BEROYA Auto Parts. All rights reserved.</p>
+        <p>
+          © {new Date().getFullYear()} BEROYA Auto Parts. {content.footer.copyright}
+        </p>
         <div>
-          <span>Automotive component manufacturer</span>
+          <span>{content.footer.bottom}</span>
           <a href="mailto:info@beroyaauto.com?subject=BEROYA%20Privacy%20Enquiry">
-            Privacy enquiries
+            {content.footer.privacy}
           </a>
         </div>
       </div>
