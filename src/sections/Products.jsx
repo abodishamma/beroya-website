@@ -20,8 +20,7 @@ export default function Products() {
             </h2>
           </div>
           <p>
-            A focused portfolio of safety-critical and performance components,
-            developed for consistent fit, confident function and long service life.
+            Core systems built for fit, safety and long service life.
           </p>
         </div>
 
@@ -42,6 +41,7 @@ export default function Products() {
               }}
               whileHover={reduceMotion ? undefined : { y: -7 }}
             >
+              <span className="product-card__glow" aria-hidden="true" />
               <div className="product-card__image">
                 <img
                   src={product.image}
@@ -61,7 +61,7 @@ export default function Products() {
                   <p>{product.text}</p>
                 </div>
                 <span className="product-card__action">
-                  Discuss this system
+                  Enquire
                   <ArrowUpRight aria-hidden="true" size={18} />
                 </span>
               </div>
@@ -73,7 +73,7 @@ export default function Products() {
           className="products__all"
           href="mailto:info@beroyaauto.com?subject=BEROYA%20Product%20Portfolio%20Request"
         >
-          Request Product Portfolio
+          Request Portfolio
           <ArrowUpRight aria-hidden="true" size={16} />
         </a>
       </div>

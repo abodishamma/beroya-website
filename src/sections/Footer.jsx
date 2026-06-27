@@ -53,7 +53,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__topline">
         <span>BEROYA Auto Parts</span>
-        <span>Precision components for global mobility</span>
+        <span>Premium automotive components</span>
         <a href="#top">
           Back to top
           <ArrowUpRight aria-hidden="true" size={15} />
@@ -64,8 +64,8 @@ export default function Footer() {
         <div className="footer__brand">
           <Brand />
           <p>
-            Premium automotive components shaped by engineering discipline,
-            manufacturing precision and an uncompromising approach to reliability.
+            Premium automotive components built with precision, durability and
+            brand discipline.
           </p>
         </div>
 

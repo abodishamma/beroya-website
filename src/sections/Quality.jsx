@@ -5,11 +5,10 @@ import Reveal from "../components/Reveal";
 import { qualityMetrics } from "../data/siteData";
 
 const controls = [
-  "OEM-aligned development discipline",
-  "Material and supplier verification",
-  "Dimensional process capability",
-  "Performance and durability validation",
-  "Controlled production traceability",
+  "OEM-aligned development",
+  "Material verification",
+  "Dimensional control",
+  "Durability validation",
 ];
 
 export default function Quality() {
@@ -38,9 +37,8 @@ export default function Quality() {
             <em>Proven over miles.</em>
           </h2>
           <p className="quality__intro">
-            Our quality mindset begins before the first component is made. Critical
-            characteristics are defined in engineering, protected in manufacturing,
-            and verified through rigorous testing.
+            Critical features are defined, protected and verified before every
+            product reaches the road.
           </p>
         </Reveal>
 
@@ -61,7 +59,7 @@ export default function Quality() {
 
         <Reveal className="quality__action" delay={0.24}>
           <a href="mailto:info@beroyaauto.com?subject=BEROYA%20Quality%20and%20Technical%20Enquiry">
-            Discuss technical requirements
+            Discuss requirements
             <ArrowUpRight aria-hidden="true" size={17} />
           </a>
         </Reveal>

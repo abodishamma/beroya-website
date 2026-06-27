@@ -17,7 +17,7 @@ export default function About() {
         />
         <div className="about__image-meta">
           <span>BEROYA / Braking Systems</span>
-          <strong>Engineered identity. Applied at source.</strong>
+          <strong>Brand built into the part.</strong>
         </div>
       </div>
 
@@ -36,13 +36,8 @@ export default function About() {
         </h2>
         <div className="gold-rule" />
         <p>
-          BEROYA Auto Parts was founded with a clear mission: to manufacture
-          automotive parts that combine advanced engineering, durability, and
-          perfect fit.
-        </p>
-        <p>
-          From concept to production, every step is carried out with precision,
-          passion, and a commitment to delivering the best to our customers.
+          BEROYA manufactures premium automotive components with disciplined
+          engineering, durable materials and precise fitment.
         </p>
         <div className="about__principles" aria-label="BEROYA manufacturing principles">
           <span>Material discipline</span>
@@ -50,7 +45,7 @@ export default function About() {
           <span>Validated durability</span>
         </div>
         <a className="button button--outline" href="#technology">
-          Explore Our Engineering
+          Our Engineering
           <ArrowRight aria-hidden="true" size={17} />
         </a>
       </Motion.div>

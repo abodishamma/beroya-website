@@ -19,8 +19,7 @@ export default function Contact() {
             <em>what comes next.</em>
           </h2>
           <p>
-            Discuss a product requirement, distribution opportunity or manufacturing
-            partnership directly with the BEROYA team.
+            Product requirements, partnerships and business enquiries.
           </p>
           <div className="contact__availability">
             <i aria-hidden="true" />
@@ -69,7 +68,7 @@ export default function Contact() {
             href="mailto:info@beroyaauto.com?subject=BEROYA%20Product%20Portfolio%20Request"
           >
             <Mail aria-hidden="true" size={17} />
-            Request the BEROYA product portfolio
+            Request product portfolio
             <ArrowUpRight aria-hidden="true" size={16} />
           </a>
         </Reveal>

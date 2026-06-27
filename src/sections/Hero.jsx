@@ -58,6 +58,13 @@ export default function Hero() {
       />
 
       <Motion.div
+        className="hero__beam"
+        aria-hidden="true"
+        animate={reduceMotion ? undefined : { x: ["-18%", "118%"] }}
+        transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1.2 }}
+      />
+
+      <Motion.div
         className="hero__monogram"
         aria-hidden="true"
         style={reduceMotion ? undefined : { x: markX }}
@@ -85,6 +92,15 @@ export default function Hero() {
           height="941"
           fetchPriority="high"
         />
+        <span className="hero__scan" aria-hidden="true" />
+        <span className="hero__hotspot hero__hotspot--brake" aria-hidden="true">
+          <i />
+          Braking
+        </span>
+        <span className="hero__hotspot hero__hotspot--suspension" aria-hidden="true">
+          <i />
+          Suspension
+        </span>
       </Motion.div>
 
       <div className="hero__meta" aria-hidden="true">
@@ -104,7 +120,7 @@ export default function Hero() {
           </Motion.span>
 
           <h1 id="hero-title">
-            {["We don’t just", "make parts,", "we build", "performance."].map((line) => (
+            {["We don't just", "make parts,", "we build", "performance."].map((line) => (
               <span className="hero__line" key={line}>
                 <Motion.span variants={reduceMotion ? {} : lineVariants}>
                   {line}
@@ -116,19 +132,24 @@ export default function Hero() {
           <Motion.div className="gold-rule" variants={reduceMotion ? {} : lineVariants} />
 
           <Motion.p variants={reduceMotion ? {} : lineVariants}>
-            BEROYA Auto Parts is a premium manufacturer of high-quality automotive
-            components. Designed with precision. Built for reliability. Made to
-            exceed expectations.
+            Premium automotive components engineered for precision, durability
+            and confident performance.
           </Motion.p>
 
           <Motion.div className="hero__actions" variants={reduceMotion ? {} : lineVariants}>
             <a className="button button--gold" href="#products">
-              Discover Our Products
+              View Products
               <ArrowRight aria-hidden="true" size={17} />
             </a>
             <a className="button button--outline" href="#technology">
-              Our Technology
+              Technology
             </a>
+          </Motion.div>
+
+          <Motion.div className="hero__proof" variants={reduceMotion ? {} : lineVariants}>
+            <span>Precision fit</span>
+            <span>Durability tested</span>
+            <span>Global supply</span>
           </Motion.div>
         </Motion.div>
       </div>

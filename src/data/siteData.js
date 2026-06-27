@@ -28,22 +28,22 @@ export const navigation = [
 export const values = [
   {
     title: "Premium Quality",
-    text: "We use the finest materials and strict quality control to ensure long-lasting performance.",
+    text: "Selected materials. Strict control.",
     icon: Award,
   },
   {
     title: "Engineered With Precision",
-    text: "Every part is designed and tested to meet or exceed OEM standards.",
+    text: "Designed and tested to exact standards.",
     icon: CircleGauge,
   },
   {
     title: "Reliability You Can Trust",
-    text: "Built for endurance and safety in the most demanding conditions.",
+    text: "Built for endurance and safety.",
     icon: ShieldCheck,
   },
   {
     title: "Built For Global Drivers",
-    text: "Proudly supplying high-performance parts to markets worldwide.",
+    text: "Ready for demanding roads worldwide.",
     icon: Globe2,
   },
 ];
@@ -85,25 +85,25 @@ export const technologySteps = [
   {
     number: "01",
     title: "Engineering Definition",
-    text: "Fit, load, material and performance targets are translated into measurable product requirements.",
+    text: "Targets become clear product requirements.",
     icon: DraftingCompass,
   },
   {
     number: "02",
     title: "Precision Manufacturing",
-    text: "Controlled machining and forming processes protect critical geometry and repeatability.",
+    text: "Controlled processes protect repeatability.",
     icon: Factory,
   },
   {
     number: "03",
     title: "Dimensional Control",
-    text: "Critical interfaces are measured against engineering intent throughout production.",
+    text: "Critical interfaces are measured precisely.",
     icon: ScanLine,
   },
   {
     number: "04",
     title: "Performance Validation",
-    text: "Components are evaluated for durability, consistency and demanding real-world duty cycles.",
+    text: "Components are proven for real-world use.",
     icon: Microscope,
   },
 ];

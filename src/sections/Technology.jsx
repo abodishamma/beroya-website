@@ -15,7 +15,7 @@ export default function Technology() {
           eyebrow="Our technology"
           title="From engineering intent"
           accent="to measured reality."
-          description="A closed-loop manufacturing philosophy connects design, material selection, precision production and validation—so quality is built into the process, not inspected in at the end."
+          description="Design, material choice, production and validation move as one controlled process."
         />
 
         <div className="technology__stage">

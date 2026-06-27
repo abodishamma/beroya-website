@@ -10,8 +10,8 @@ export default function Brand({ className = "", priority = false }) {
       <img
         src={logo}
         alt="BEROYA Auto Parts"
-        width="853"
-        height="665"
+        width="534"
+        height="178"
         fetchPriority={priority ? "high" : "auto"}
       />
     </a>
