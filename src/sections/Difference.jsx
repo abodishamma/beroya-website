@@ -18,7 +18,7 @@ export default function Difference() {
         <Reveal className="difference__visual">
           <img
             src={differenceImage}
-            alt="BEROYA branded performance braking component"
+            alt={content.accessibility.differenceImage}
             width="1536"
             height="1024"
             loading="lazy"

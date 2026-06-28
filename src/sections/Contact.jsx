@@ -31,7 +31,7 @@ export default function Contact() {
         <Reveal className="contact__actions" delay={0.1}>
           <a
             className="contact__primary"
-            href="mailto:info@beroyaauto.com?subject=BEROYA%20Business%20Enquiry"
+            href={`mailto:info@beroyaauto.com?subject=${encodeURIComponent(content.mailSubjects.business)}`}
           >
             <span>
               <small>{content.contact.primary[0]}</small>
@@ -66,7 +66,7 @@ export default function Contact() {
 
           <a
             className="contact__portfolio"
-            href="mailto:info@beroyaauto.com?subject=BEROYA%20Product%20Portfolio%20Request"
+            href={`mailto:info@beroyaauto.com?subject=${encodeURIComponent(content.mailSubjects.portfolio)}`}
           >
             <Mail aria-hidden="true" size={17} />
             {content.contact.portfolio}

@@ -40,7 +40,12 @@ export default function Manufacturing() {
               viewport={{ once: true, amount: 0.28 }}
               transition={{ duration: 0.76, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <img src={images[index]} alt="" loading="lazy" decoding="async" />
+              <img
+                src={images[index]}
+                alt={content.manufacturing.imageAlts[index]}
+                loading="lazy"
+                decoding="async"
+              />
               <div>
                 <span>
                   <Icon aria-hidden="true" />

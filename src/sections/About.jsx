@@ -12,7 +12,7 @@ export default function About() {
       <div className="about__image">
         <img
           src={aboutImage}
-          alt="Close-up of a premium black performance brake caliper and disc"
+          alt={content.accessibility.aboutImage}
           width="1536"
           height="1024"
           loading="lazy"
@@ -38,7 +38,7 @@ export default function About() {
         </h2>
         <div className="gold-rule" />
         <p>{content.about.text}</p>
-        <div className="about__principles" aria-label="BEROYA manufacturing principles">
+        <div className="about__principles" aria-label={content.accessibility.manufacturingPrinciples}>
           {content.about.principles.map((principle) => (
             <span key={principle}>{principle}</span>
           ))}

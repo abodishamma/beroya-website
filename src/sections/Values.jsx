@@ -8,7 +8,7 @@ export default function Values() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="values" id="principles" aria-label="BEROYA engineering principles">
+    <section className="values" id="principles" aria-label={content.accessibility.principles}>
       <img className="values__brand-ghost" src={logo} alt="" aria-hidden="true" />
       <div className="container values__grid">
         {values.map((value, index) => {

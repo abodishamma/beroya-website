@@ -77,7 +77,7 @@ export default function Hero() {
         }
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       >
-        <img src={brandMark} alt="" width="219" height="420" />
+        <img src={brandMark} alt="" aria-hidden="true" width="219" height="420" />
       </Motion.div>
 
       <Motion.div
@@ -89,7 +89,7 @@ export default function Hero() {
       >
         <img
           src={heroImage}
-          alt="Premium BEROYA braking, suspension and drivetrain components"
+          alt={content.accessibility.heroImage}
           width="1672"
           height="941"
           fetchPriority="high"

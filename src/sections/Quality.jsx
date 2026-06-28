@@ -13,7 +13,7 @@ export default function Quality() {
       <div className="quality__visual">
         <img
           src={qualityImage}
-          alt="Coordinate measurement of a precision automotive component"
+          alt={content.accessibility.qualityImage}
           width="1536"
           height="1024"
           loading="lazy"
@@ -51,7 +51,7 @@ export default function Quality() {
         </Reveal>
 
         <Reveal className="quality__action" delay={0.24}>
-          <a href="mailto:info@beroyaauto.com?subject=BEROYA%20Quality%20and%20Technical%20Enquiry">
+          <a href={`mailto:info@beroyaauto.com?subject=${encodeURIComponent(content.mailSubjects.quality)}`}>
             {content.quality.cta}
             <ArrowUpRight aria-hidden="true" size={17} />
           </a>

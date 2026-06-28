@@ -69,7 +69,7 @@ export default function Navbar() {
       <div className="container nav">
         <Brand className="nav__brand" priority />
 
-        <nav className="nav__links" aria-label="Primary navigation">
+        <nav className="nav__links" aria-label={content.nav.primaryNavigation}>
           {navigation.map((item) => {
             const id = item.href.slice(1);
             const active = activeSection === id;
@@ -93,9 +93,9 @@ export default function Navbar() {
             aria-label={content.nav.aria}
             onClick={toggleLanguage}
           >
-            <span className={language === "en" ? "is-active" : ""}>EN</span>
+            <span className={language === "en" ? "is-active" : ""}>{content.nav.englishLabel}</span>
             <i aria-hidden="true" />
-            <span className={language === "ar" ? "is-active" : ""}>العربية</span>
+            <span className={language === "ar" ? "is-active" : ""}>{content.nav.arabicLabel}</span>
           </button>
 
           <a className="nav__cta" href="#contact">
@@ -107,7 +107,7 @@ export default function Navbar() {
         <button
           className="nav__menu"
           type="button"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label={menuOpen ? content.nav.menuClose : content.nav.menuOpen}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
@@ -130,7 +130,7 @@ export default function Navbar() {
             exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
-            <nav aria-label="Mobile navigation">
+            <nav aria-label={content.nav.mobileNavigation}>
               {navigation.map((item, index) => (
                 <a
                   href={item.href}
@@ -143,9 +143,9 @@ export default function Navbar() {
               ))}
             </nav>
             <button className="mobile-nav__language" type="button" onClick={toggleLanguage}>
-              EN
+              {content.nav.englishLabel}
               <i aria-hidden="true" />
-              العربية
+              {content.nav.arabicLabel}
             </button>
             <a className="mobile-nav__cta" href="#contact" onClick={() => setMenuOpen(false)}>
               {content.nav.mobileCta}

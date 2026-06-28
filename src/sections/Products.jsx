@@ -47,7 +47,7 @@ export default function Products() {
                 <div className="product-card__image">
                   <img
                     src={product.image}
-                    alt=""
+                    alt={`${title} — ${content.accessibility.brandLogo}`}
                     width="496"
                     height="496"
                     loading="lazy"
@@ -74,7 +74,7 @@ export default function Products() {
 
         <a
           className="products__all"
-          href="mailto:info@beroyaauto.com?subject=BEROYA%20Product%20Portfolio%20Request"
+          href={`mailto:info@beroyaauto.com?subject=${encodeURIComponent(content.mailSubjects.portfolio)}`}
         >
           {content.products.cta}
           <ArrowUpRight aria-hidden="true" size={16} />

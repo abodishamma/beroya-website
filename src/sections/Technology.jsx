@@ -24,7 +24,7 @@ export default function Technology() {
           <Reveal className="technology__visual">
             <img
               src={technologyImage}
-              alt="Precision CNC machining of an automotive suspension component"
+              alt={content.accessibility.technologyImage}
               width="1536"
               height="1024"
               loading="lazy"

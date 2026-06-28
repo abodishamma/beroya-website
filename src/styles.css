@@ -45,6 +45,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+#root,
+main {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 body::selection {
   color: var(--black);
   background: var(--gold-light);
@@ -1307,6 +1313,7 @@ body::before {
 
 .site-header {
   background: linear-gradient(180deg, rgba(2, 3, 3, 0.72), transparent);
+  direction: ltr;
 }
 
 .site-header--scrolled {
@@ -3699,6 +3706,20 @@ body::before {
 
 .nav {
   grid-template-columns: 190px 1fr 310px;
+  direction: ltr;
+}
+
+.nav__links,
+.nav__actions,
+.mobile-nav {
+  direction: ltr;
+}
+
+body[data-lang="ar"] .nav__links,
+body[data-lang="ar"] .nav__actions,
+body[data-lang="ar"] .mobile-nav nav,
+body[data-lang="ar"] .mobile-nav__cta {
+  direction: rtl;
 }
 
 .nav__brand {

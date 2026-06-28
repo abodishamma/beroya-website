@@ -4,15 +4,6 @@ import { useLanguage } from "../hooks/useLanguage";
 
 const companyHrefs = ["#about", "#technology", "#manufacturing", "#quality", "#contact"];
 
-const productSubjects = [
-  "Braking System",
-  "Suspension Parts",
-  "Engine Mounts",
-  "Filtration",
-  "Steering Parts",
-  "Drivetrain Parts",
-];
-
 function mailSubject(subject) {
   return `mailto:info@beroyaauto.com?subject=${encodeURIComponent(subject)}`;
 }
@@ -44,15 +35,17 @@ export default function Footer() {
 
   const productLinks = content.products.items.map(([label], index) => ({
     label,
-    href: mailSubject(`BEROYA ${productSubjects[index]} Enquiry`),
+    href: mailSubject(
+      `${content.mailSubjects.productPrefix} ${content.products.items[index][0]} ${content.mailSubjects.productSuffix}`,
+    ),
   }));
 
   const businessLinks = content.footer.links.business.map((label, index) => ({
     label,
     href: [
-      mailSubject("BEROYA Product Portfolio Request"),
-      mailSubject("BEROYA Distribution Partnership"),
-      mailSubject("BEROYA Technical Enquiry"),
+      mailSubject(content.mailSubjects.portfolio),
+      mailSubject(content.mailSubjects.partnership),
+      mailSubject(content.mailSubjects.technical),
     ][index],
   }));
 
@@ -75,14 +68,14 @@ export default function Footer() {
         <div className="footer__brand">
           <Brand />
           <p>{content.footer.description}</p>
-          <div className="footer__socials" aria-label="Social media">
-            <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
+          <div className="footer__socials" aria-label={content.accessibility.social}>
+            <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label={content.accessibility.facebook}>
               <Facebook aria-hidden="true" size={14} />
             </a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label={content.accessibility.instagram}>
               <Instagram aria-hidden="true" size={14} />
             </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label={content.accessibility.linkedin}>
               <Linkedin aria-hidden="true" size={14} />
             </a>
           </div>
@@ -120,7 +113,7 @@ export default function Footer() {
         </p>
         <div>
           <span>{content.footer.bottom}</span>
-          <a href="mailto:info@beroyaauto.com?subject=BEROYA%20Privacy%20Enquiry">
+          <a href={`mailto:info@beroyaauto.com?subject=${encodeURIComponent(content.mailSubjects.privacy)}`}>
             {content.footer.privacy}
           </a>
         </div>
