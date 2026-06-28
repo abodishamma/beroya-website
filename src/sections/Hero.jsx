@@ -16,7 +16,7 @@ const lineVariants = {
 };
 
 export default function Hero() {
-  const { content } = useLanguage();
+  const { content, language } = useLanguage();
   const reduceMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -32,6 +32,7 @@ export default function Hero() {
     stiffness: 70,
     damping: 28,
   });
+  const markOpacity = language === "ar" ? [0.024, 0.044, 0.024] : [0.038, 0.066, 0.038];
 
   const handlePointerMove = (event) => {
     if (reduceMotion) return;
@@ -73,7 +74,7 @@ export default function Hero() {
         animate={
           reduceMotion
             ? undefined
-            : { y: [0, -11, 0], opacity: [0.06, 0.1, 0.06] }
+            : { y: [0, -11, 0], opacity: markOpacity }
         }
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -94,6 +95,11 @@ export default function Hero() {
           height="941"
           fetchPriority="high"
         />
+        <span className="hero__smoke" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
         <span className="hero__scan" aria-hidden="true" />
         <span className="hero__hotspot hero__hotspot--brake" aria-hidden="true">
           <i />
