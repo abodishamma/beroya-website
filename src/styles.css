@@ -5366,3 +5366,186 @@ body[data-lang="ar"] .products__all {
     object-position: 68% center;
   }
 }
+
+/* Quality section final composition — keep copy off the photography */
+
+.quality {
+  min-height: auto;
+  display: block;
+  padding: clamp(82px, 9vw, 136px) 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(213, 178, 115, 0.08), transparent 29%),
+    radial-gradient(circle at 78% 68%, rgba(255, 255, 255, 0.045), transparent 24%),
+    linear-gradient(135deg, #080909 0%, #030404 58%, #0b0c0b 100%);
+}
+
+.quality::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(213, 178, 115, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+  background-size: 118px 118px;
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  opacity: 0.28;
+}
+
+.quality__layout {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(480px, 1.12fr);
+  align-items: center;
+  gap: clamp(34px, 5vw, 78px);
+}
+
+.quality__content {
+  position: relative;
+  z-index: 3;
+  max-width: none;
+  padding: clamp(30px, 4vw, 56px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(145deg, rgba(20, 21, 20, 0.86), rgba(7, 8, 8, 0.94)),
+    radial-gradient(circle at 92% 12%, rgba(213, 178, 115, 0.1), transparent 36%);
+  box-shadow:
+    0 34px 100px rgba(0, 0, 0, 0.46),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+}
+
+.quality h2 {
+  max-width: 720px;
+  font-size: clamp(44px, 5vw, 76px);
+}
+
+.quality__intro,
+.quality__controls,
+.quality .metrics {
+  max-width: 100%;
+}
+
+.quality__visual {
+  position: relative;
+  inset: auto;
+  min-height: clamp(430px, 54vw, 690px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #060707;
+  box-shadow:
+    0 36px 120px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(213, 178, 115, 0.06);
+}
+
+.quality__visual::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid rgba(213, 178, 115, 0.16);
+  opacity: 0.72;
+}
+
+.quality__visual::after {
+  content: "METROLOGY / VALIDATION";
+  position: absolute;
+  right: 30px;
+  bottom: 28px;
+  z-index: 3;
+  padding-top: 14px;
+  border-top: 1px solid rgba(213, 178, 115, 0.34);
+  color: rgba(213, 178, 115, 0.74);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.quality__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(0.16) contrast(1.14) brightness(0.78) saturate(0.76);
+  transform: scale(1.01);
+}
+
+.quality__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(3, 4, 4, 0.2), transparent 42%, rgba(3, 4, 4, 0.42)),
+    linear-gradient(90deg, rgba(3, 4, 4, 0.3), transparent 36%, rgba(3, 4, 4, 0.14));
+}
+
+.quality .metrics {
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.042), rgba(255, 255, 255, 0.012)),
+    rgba(4, 5, 5, 0.58);
+}
+
+[dir="rtl"] .quality__content {
+  text-align: right;
+}
+
+[dir="rtl"] .quality__visual::after {
+  right: auto;
+  left: 30px;
+}
+
+@media (max-width: 1100px) {
+  .quality {
+    padding: 76px 0 90px;
+  }
+
+  .quality__layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .quality__visual {
+    order: -1;
+    min-height: clamp(340px, 64vw, 560px);
+  }
+}
+
+@media (max-width: 640px) {
+  .quality {
+    padding: 62px 0 70px;
+  }
+
+  .quality__content {
+    padding: 26px 20px 28px;
+  }
+
+  .quality h2 {
+    font-size: clamp(34px, 10.5vw, 44px);
+  }
+
+  .quality__visual {
+    min-height: 320px;
+  }
+
+  .quality__visual::before {
+    inset: 12px;
+  }
+
+  .quality__visual::after {
+    right: 18px;
+    bottom: 18px;
+    left: auto;
+  }
+
+  [dir="rtl"] .quality__visual::after {
+    right: auto;
+    left: 18px;
+  }
+}
