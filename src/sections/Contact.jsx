@@ -1,5 +1,5 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import brandMark from "../assets/beroya-mark-2026.png";
+import brandMark from "../assets/beroya-mark-2026-transparent.png";
 import Reveal from "../components/Reveal";
 import { useLanguage } from "../hooks/useLanguage";
 

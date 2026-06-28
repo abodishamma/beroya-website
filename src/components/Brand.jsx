@@ -1,4 +1,4 @@
-import logo from "../assets/beroya-logo-2026.png";
+import logo from "../assets/beroya-logo-2026-transparent.png";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function Brand({ className = "", priority = false }) {

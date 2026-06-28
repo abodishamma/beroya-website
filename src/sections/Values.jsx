@@ -1,7 +1,7 @@
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../hooks/useLanguage";
 import { values } from "../data/siteData";
-import logo from "../assets/beroya-logo-2026.png";
+import logo from "../assets/beroya-logo-2026-transparent.png";
 
 export default function Values() {
   const { content } = useLanguage();

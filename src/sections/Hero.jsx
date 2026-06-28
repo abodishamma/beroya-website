@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import heroImage from "../assets/reference-redesign/hero-components.webp";
-import brandMark from "../assets/beroya-mark-2026.png";
+import brandMark from "../assets/beroya-mark-2026-transparent.png";
 import { useLanguage } from "../hooks/useLanguage";
 
 const lineVariants = {

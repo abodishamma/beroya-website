@@ -4354,3 +4354,52 @@ body[data-lang="ar"] .products__all {
     line-height: 1.08;
   }
 }
+
+/* Final logo/RTL polish */
+
+[dir="rtl"] .hero__monogram {
+  right: clamp(72px, 8vw, 135px);
+  left: auto;
+  width: clamp(155px, 13vw, 205px);
+  opacity: 0.052;
+}
+
+[dir="rtl"] .hero__image {
+  left: min(-34px, -1.8vw);
+}
+
+[dir="rtl"] .hero__image::after {
+  background:
+    linear-gradient(270deg, var(--black) 0%, rgba(5, 6, 6, 0.86) 18%, transparent 40%),
+    linear-gradient(0deg, rgba(5, 6, 6, 0.48), transparent 24%);
+}
+
+.brand-lockup img {
+  mix-blend-mode: normal;
+}
+
+@media (max-width: 940px) {
+  [dir="rtl"] .hero__monogram {
+    right: 7%;
+    width: 150px;
+    opacity: 0.04;
+  }
+
+  [dir="rtl"] .hero__image {
+    right: auto;
+    left: -18%;
+  }
+}
+
+@media (max-width: 640px) {
+  [dir="rtl"] .hero__monogram {
+    right: 10px;
+    width: 118px;
+    opacity: 0.032;
+  }
+
+  [dir="rtl"] .hero__image {
+    right: auto;
+    left: -43%;
+  }
+}

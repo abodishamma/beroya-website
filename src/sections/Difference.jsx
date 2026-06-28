@@ -1,7 +1,7 @@
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import { CircleGauge, ShieldCheck, Target } from "lucide-react";
 import differenceImage from "../assets/reference-redesign/about-caliper-branded.webp";
-import brandMark from "../assets/beroya-mark-2026.png";
+import brandMark from "../assets/beroya-mark-2026-transparent.png";
 import Reveal from "../components/Reveal";
 import { useLanguage } from "../hooks/useLanguage";
 

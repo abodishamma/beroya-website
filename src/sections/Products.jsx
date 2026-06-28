@@ -2,7 +2,7 @@ import { motion as Motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
 import { products } from "../data/siteData";
-import brandMark from "../assets/beroya-mark-2026.png";
+import brandMark from "../assets/beroya-mark-2026-transparent.png";
 
 export default function Products() {
   const { content } = useLanguage();
