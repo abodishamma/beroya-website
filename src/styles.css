@@ -5325,3 +5325,44 @@ body[data-lang="ar"] .products__all {
     display: none;
   }
 }
+
+/* Hero image framing fix — keep the automotive set from feeling cropped */
+
+@media (min-width: 1101px) {
+  .hero__image,
+  [dir="rtl"] .hero__image {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__image img,
+  [dir="rtl"] .hero__image img {
+    object-fit: contain;
+    object-position: center bottom;
+    transform: scale(1);
+    filter: contrast(1.14) saturate(0.82) brightness(1.1);
+  }
+
+  .hero__image::after {
+    background:
+      linear-gradient(90deg, rgba(3, 4, 4, 0.98) 0%, rgba(3, 4, 4, 0.74) 22%, rgba(3, 4, 4, 0.12) 58%, rgba(3, 4, 4, 0.44) 100%),
+      linear-gradient(180deg, rgba(3, 4, 4, 0.12) 0%, transparent 34%, rgba(3, 4, 4, 0.68) 100%);
+  }
+
+  [dir="rtl"] .hero__image::after {
+    background:
+      linear-gradient(270deg, rgba(3, 4, 4, 0.98) 0%, rgba(3, 4, 4, 0.74) 22%, rgba(3, 4, 4, 0.12) 58%, rgba(3, 4, 4, 0.44) 100%),
+      linear-gradient(180deg, rgba(3, 4, 4, 0.12) 0%, transparent 34%, rgba(3, 4, 4, 0.68) 100%);
+  }
+
+  .hero__copy,
+  [dir="rtl"] .hero__copy {
+    position: relative;
+    z-index: 8;
+  }
+
+  .technology__visual img {
+    object-position: 68% center;
+  }
+}

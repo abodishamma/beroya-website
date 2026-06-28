@@ -1,6 +1,6 @@
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import { Factory, Microscope, ScanLine } from "lucide-react";
-import technologyImage from "../assets/technology-cnc.webp";
+import technologyImage from "../assets/technology-cnc-branded.webp";
 import qualityImage from "../assets/quality-metrology.webp";
 import brakingImage from "../assets/reference-redesign/braking-system.webp";
 import Reveal from "../components/Reveal";

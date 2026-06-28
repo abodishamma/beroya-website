@@ -1,5 +1,5 @@
 import { motion as Motion, useReducedMotion } from "framer-motion";
-import technologyImage from "../assets/technology-cnc.webp";
+import technologyImage from "../assets/technology-cnc-branded.webp";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import { useLanguage } from "../hooks/useLanguage";
