@@ -6109,3 +6109,131 @@ a {
     will-change: auto;
   }
 }
+
+/* Mobile typography calibration */
+
+@media (max-width: 640px) {
+  .hero h1,
+  [dir="rtl"] .hero h1 {
+    max-width: min(100%, 318px);
+    font-size: clamp(27px, 7.65vw, 34px);
+    line-height: 1.14;
+    letter-spacing: -0.026em;
+  }
+
+  [dir="rtl"] .hero h1 {
+    max-width: min(100%, 300px);
+    font-size: clamp(26px, 7.25vw, 31px);
+    line-height: 1.24;
+    letter-spacing: -0.006em;
+  }
+
+  .hero__copy > p,
+  [dir="rtl"] .hero__copy > p {
+    max-width: 330px;
+    font-size: 12px;
+    line-height: 1.72;
+  }
+
+  .hero__actions {
+    gap: 10px;
+  }
+
+  .hero__actions .button {
+    min-height: 45px;
+    padding-inline: 15px;
+    font-size: 9px;
+  }
+
+  .section-kicker,
+  .eyebrow,
+  .hero__copy::before {
+    letter-spacing: 0.14em;
+    font-size: 8px;
+  }
+
+  .about h2,
+  .section-heading h2,
+  .products__heading h2,
+  .quality h2,
+  .contact h2,
+  .difference__headline h2,
+  .difference__content h2,
+  .manufacturing__heading h2 {
+    font-size: clamp(24px, 6.85vw, 30px);
+    line-height: 1.12;
+    letter-spacing: -0.026em;
+  }
+
+  [dir="rtl"] .about h2,
+  [dir="rtl"] .section-heading h2,
+  [dir="rtl"] .products__heading h2,
+  [dir="rtl"] .quality h2,
+  [dir="rtl"] .contact h2,
+  [dir="rtl"] .difference__headline h2,
+  [dir="rtl"] .difference__content h2,
+  [dir="rtl"] .manufacturing__heading h2 {
+    line-height: 1.25;
+    letter-spacing: -0.004em;
+  }
+
+  .products__heading > p,
+  .section-heading > div:last-child > p,
+  .section-heading > p,
+  .difference__summary p,
+  .about__content p,
+  .quality p,
+  .contact p {
+    font-size: 11px;
+    line-height: 1.72;
+  }
+
+  .mobile-nav nav a {
+    min-height: 50px;
+    font-size: clamp(20px, 5.7vw, 25px);
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+  }
+
+  body[data-lang="ar"] .mobile-nav nav a {
+    font-size: clamp(18px, 5.25vw, 23px);
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+  }
+
+  .product-card h3,
+  .difference__pillars h3,
+  .manufacturing-card h3 {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .product-card p,
+  .difference__pillars p,
+  .manufacturing-card p {
+    font-size: 11px;
+    line-height: 1.62;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero h1,
+  [dir="rtl"] .hero h1 {
+    max-width: 300px;
+    font-size: clamp(26px, 7.6vw, 31px);
+  }
+
+  [dir="rtl"] .hero h1 {
+    max-width: 288px;
+    font-size: clamp(25px, 7.25vw, 30px);
+  }
+
+  .mobile-nav nav a {
+    min-height: 47px;
+    font-size: clamp(18px, 5.3vw, 22px);
+  }
+
+  body[data-lang="ar"] .mobile-nav nav a {
+    font-size: clamp(17px, 5vw, 21px);
+  }
+}
