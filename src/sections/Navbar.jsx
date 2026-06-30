@@ -65,7 +65,15 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
+    <header
+      className={[
+        "site-header",
+        scrolled ? "site-header--scrolled" : "",
+        menuOpen ? "site-header--menu-open" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div className="container nav">
         <Brand className="nav__brand" priority />
 
