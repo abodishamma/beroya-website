@@ -10,9 +10,11 @@ import Quality from "../sections/Quality";
 import Technology from "../sections/Technology";
 import Values from "../sections/Values";
 import { useLanguage } from "../hooks/useLanguage";
+import { useSmoothAnchors } from "../hooks/useSmoothAnchors";
 
 export default function HomePage() {
   const { content } = useLanguage();
+  useSmoothAnchors();
 
   return (
     <>

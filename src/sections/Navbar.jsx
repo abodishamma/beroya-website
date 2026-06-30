@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion as Motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Brand from "../components/Brand";
 import { useLanguage } from "../hooks/useLanguage";
 import { navigation } from "../data/siteData";
 import { useScrolled } from "../hooks/useScrolled";
+import { smoothScrollToHash } from "../utils/smoothScroll";
 
 export default function Navbar() {
   const { content, language, toggleLanguage } = useLanguage();
@@ -12,7 +13,7 @@ export default function Navbar() {
   const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -50,19 +51,46 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    let frame = 0;
+
     const updateProgress = () => {
+      frame = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0);
+      const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${progress})`;
+      }
+    };
+
+    const scheduleProgress = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateProgress);
     };
 
     updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+    window.addEventListener("scroll", scheduleProgress, { passive: true });
+    window.addEventListener("resize", scheduleProgress);
+
     return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleProgress);
+      window.removeEventListener("resize", scheduleProgress);
     };
   }, []);
+
+  const handleAnchorClick = (event, href) => {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    if (smoothScrollToHash(href)) event.preventDefault();
+    setMenuOpen(false);
+  };
 
   return (
     <header
@@ -87,6 +115,7 @@ export default function Navbar() {
                 href={item.href}
                 key={item.key}
                 aria-current={active ? "page" : undefined}
+                onClick={(event) => handleAnchorClick(event, item.href)}
               >
                 {content.nav[item.key]}
               </a>
@@ -106,7 +135,7 @@ export default function Navbar() {
             <span className={language === "ar" ? "is-active" : ""}>{content.nav.arabicLabel}</span>
           </button>
 
-          <a className="nav__cta" href="#contact">
+          <a className="nav__cta" href="#contact" onClick={(event) => handleAnchorClick(event, "#contact")}>
             <span>{content.nav.cta}</span>
             <i aria-hidden="true" />
           </a>
@@ -125,7 +154,7 @@ export default function Navbar() {
       </div>
 
       <div className="site-header__progress" aria-hidden="true">
-        <span style={{ transform: `scaleX(${scrollProgress})` }} />
+        <span ref={progressRef} />
       </div>
 
       <AnimatePresence>
@@ -143,7 +172,7 @@ export default function Navbar() {
                 <a
                   href={item.href}
                   key={item.key}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(event) => handleAnchorClick(event, item.href)}
                 >
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   {content.nav[item.key]}
@@ -155,7 +184,7 @@ export default function Navbar() {
               <i aria-hidden="true" />
               {content.nav.arabicLabel}
             </button>
-            <a className="mobile-nav__cta" href="#contact" onClick={() => setMenuOpen(false)}>
+            <a className="mobile-nav__cta" href="#contact" onClick={(event) => handleAnchorClick(event, "#contact")}>
               {content.nav.mobileCta}
             </a>
           </Motion.div>

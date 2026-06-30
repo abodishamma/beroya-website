@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import {
   motion as Motion,
   useMotionValue,
@@ -20,6 +21,8 @@ export default function Hero() {
   const reduceMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
+  const pointerFrame = useRef(0);
+  const latestPointer = useRef({ x: 0, y: 0 });
   const imageX = useSpring(useTransform(pointerX, [-1, 1], [-12, 12]), {
     stiffness: 90,
     damping: 24,
@@ -34,14 +37,35 @@ export default function Hero() {
   });
   const markOpacity = language === "ar" ? [0.024, 0.044, 0.024] : [0.038, 0.066, 0.038];
 
+  useEffect(() => {
+    return () => {
+      if (pointerFrame.current) window.cancelAnimationFrame(pointerFrame.current);
+    };
+  }, []);
+
   const handlePointerMove = (event) => {
-    if (reduceMotion) return;
+    if (reduceMotion || event.pointerType !== "mouse") return;
     const bounds = event.currentTarget.getBoundingClientRect();
-    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 2);
-    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 2);
+    latestPointer.current = {
+      x: ((event.clientX - bounds.left) / bounds.width - 0.5) * 2,
+      y: ((event.clientY - bounds.top) / bounds.height - 0.5) * 2,
+    };
+
+    if (pointerFrame.current) return;
+
+    pointerFrame.current = window.requestAnimationFrame(() => {
+      pointerFrame.current = 0;
+      pointerX.set(latestPointer.current.x);
+      pointerY.set(latestPointer.current.y);
+    });
   };
 
   const resetPointer = () => {
+    if (pointerFrame.current) {
+      window.cancelAnimationFrame(pointerFrame.current);
+      pointerFrame.current = 0;
+    }
+    latestPointer.current = { x: 0, y: 0 };
     pointerX.set(0);
     pointerY.set(0);
   };
