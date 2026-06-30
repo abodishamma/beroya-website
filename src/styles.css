@@ -6027,3 +6027,31 @@ body[data-lang="ar"] .products__all {
   pointer-events: auto;
   transform: translateY(0);
 }
+
+/* Final desktop sidebar logo balance + non-repeated Difference artwork */
+
+@media (min-width: 1101px) {
+  .site-header .nav {
+    width: 100%;
+    margin-inline: 0;
+    box-sizing: border-box;
+  }
+
+  .site-header .brand-lockup,
+  .site-header .nav__brand {
+    width: 166px;
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .site-header .brand-lockup img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .difference__visual img {
+    object-position: center bottom;
+  }
+}
