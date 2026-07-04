@@ -332,3 +332,389 @@ export const dictionary = {
     },
   },
 };
+
+dictionary.en.nav.shop = "Shop";
+dictionary.en.nav.categories = "Categories";
+dictionary.en.nav.search = "Search";
+dictionary.en.nav.cart = "Cart";
+dictionary.en.nav.checkout = "Checkout";
+
+dictionary.ar.nav.shop = "المتجر";
+dictionary.ar.nav.categories = "الفئات";
+dictionary.ar.nav.search = "البحث";
+dictionary.ar.nav.cart = "السلة";
+dictionary.ar.nav.checkout = "إتمام الطلب";
+
+dictionary.en.shop = {
+  kicker: "BEROYA Online Store",
+  title: ["Premium parts,", "engineered to order."],
+  description:
+    "Shop high-quality automotive components with verified fitment, warranty confidence and direct technical inquiry support.",
+  storeStatsLabel: "Store summary",
+  storeStats: {
+    products: "systems",
+    cart: "in cart",
+  },
+  categoriesLabel: "Product categories",
+  allCategories: "All systems",
+  searchLabel: "Search products",
+  searchPlaceholder: "Search by product, SKU, category, or vehicle compatibility",
+  showing: "Showing {count} premium products",
+  empty: "No products match your current search.",
+  viewCart: "View cart",
+  quickView: "Quick view",
+  addToCart: "Add to cart",
+  enquire: "Enquire",
+  details: "Details",
+  detailsKicker: "Product Details",
+  whatsappButton: "WhatsApp enquiry",
+  specifications: "Specifications",
+  relatedProducts: "Related products",
+  warrantyMonths: "{months}-month warranty",
+  sort: {
+    label: "Sort",
+    featured: "Featured",
+    priceAsc: "Price: low to high",
+    priceDesc: "Price: high to low",
+    name: "Name",
+  },
+  labels: {
+    product: "Product",
+    price: "Price",
+    sku: "SKU",
+    availability: "Availability",
+    compatibility: "Compatibility",
+    warranty: "Warranty",
+  },
+  categories: {
+    braking: "Braking System",
+    suspension: "Suspension Parts",
+    mounts: "Engine Mounts",
+    filtration: "Filtration",
+    steering: "Steering Parts",
+    drivetrain: "Drivetrain Parts",
+  },
+  availability: {
+    inStock: "In stock",
+    limited: "Limited availability",
+    preOrder: "Available by inquiry",
+  },
+  whatsapp: {
+    productIntro: "Hello BEROYA, I would like to enquire about this product:",
+  },
+  products: {
+    "braking-system-pro": {
+      name: "Performance Braking System",
+      shortDescription: "Premium brake disc and caliper assembly engineered for confident stopping power.",
+      compatibility: "Sedan, SUV and performance platforms with OEM-aligned brake fitment.",
+      description:
+        "A precision braking system built for high thermal stability, consistent pedal feel and long service life in demanding road conditions.",
+      specifications: [
+        ["Material", "High-carbon alloy disc with coated performance hardware"],
+        ["Testing", "Thermal cycle and vibration validation"],
+        ["Fitment", "OEM-aligned geometry for direct replacement"],
+        ["Use case", "Daily, touring and performance driving"],
+      ],
+    },
+    "suspension-control-arm": {
+      name: "Precision Suspension Control Arm",
+      shortDescription: "Stable, durable suspension geometry for refined control and ride comfort.",
+      compatibility: "Popular compact, sedan and crossover suspension platforms.",
+      description:
+        "A premium control arm system developed to preserve alignment accuracy, reduce road harshness and support confident handling.",
+      specifications: [
+        ["Material", "Forged steel architecture with premium bushings"],
+        ["Testing", "Fatigue, corrosion and road-load validation"],
+        ["Fitment", "Direct-fit interfaces with OEM-style mounting"],
+        ["Use case", "Comfort, stability and long-distance durability"],
+      ],
+    },
+    "engine-mount-premium": {
+      name: "Premium Engine Mount",
+      shortDescription: "Engineered mount system designed to reduce vibration and protect drivetrain alignment.",
+      compatibility: "Gasoline and diesel engine platforms across sedan and SUV applications.",
+      description:
+        "A refined engine mount built with tuned rubber density and reinforced structure for smoother cabin feel and dependable engine support.",
+      specifications: [
+        ["Material", "Reinforced steel bracket with tuned elastomer core"],
+        ["Testing", "Load, heat and vibration endurance validation"],
+        ["Fitment", "Platform-specific mounting points"],
+        ["Use case", "Noise, vibration and harshness control"],
+      ],
+    },
+    "filtration-performance-kit": {
+      name: "Performance Filtration Kit",
+      shortDescription: "Cleaner intake and fluid protection for better long-term engine health.",
+      compatibility: "Multi-platform service applications with matched filter dimensions.",
+      description:
+        "A filtration kit developed for consistent flow, fine particle control and dependable protection across regular service intervals.",
+      specifications: [
+        ["Media", "High-efficiency synthetic filtration media"],
+        ["Testing", "Flow, pressure and particle retention validation"],
+        ["Fitment", "Service-ready matched dimensions"],
+        ["Use case", "Scheduled maintenance and fleet reliability"],
+      ],
+    },
+    "steering-precision-link": {
+      name: "Precision Steering Link",
+      shortDescription: "Responsive steering component engineered for accurate road feedback and control.",
+      compatibility: "Steering systems for compact, sedan, SUV and light commercial applications.",
+      description:
+        "A steering component designed to maintain precise articulation, reduce play and support stable vehicle response.",
+      specifications: [
+        ["Material", "Heat-treated steel joint with sealed boot protection"],
+        ["Testing", "Articulation, corrosion and impact validation"],
+        ["Fitment", "OEM-style taper and thread specification"],
+        ["Use case", "Steering precision and road confidence"],
+      ],
+    },
+    "drivetrain-joint-assembly": {
+      name: "Drivetrain Joint Assembly",
+      shortDescription: "Power transmission component built for smooth delivery and durable operation.",
+      compatibility: "Front and rear drivetrain applications across popular passenger platforms.",
+      description:
+        "A drivetrain assembly engineered for reliable torque transfer, reduced vibration and long-mileage performance.",
+      specifications: [
+        ["Material", "Hardened steel joint with premium boot assembly"],
+        ["Testing", "Torque, angle and endurance validation"],
+        ["Fitment", "Vehicle-specific spline and joint geometry"],
+        ["Use case", "Smooth power delivery under demanding use"],
+      ],
+    },
+  },
+};
+
+dictionary.ar.shop = {
+  kicker: "متجر BEROYA الإلكتروني",
+  title: ["قطع فاخرة،", "مصممة حسب متطلبات الأداء."],
+  description:
+    "تسوّق مكونات سيارات عالية الجودة مع توافق موثّق، ضمان واضح، ودعم فني مباشر للاستفسارات.",
+  storeStatsLabel: "ملخص المتجر",
+  storeStats: {
+    products: "أنظمة",
+    cart: "في السلة",
+  },
+  categoriesLabel: "فئات المنتجات",
+  allCategories: "كل الأنظمة",
+  searchLabel: "البحث عن المنتجات",
+  searchPlaceholder: "ابحث باسم المنتج أو SKU أو الفئة أو توافق السيارة",
+  showing: "عرض {count} منتجات فاخرة",
+  empty: "لا توجد منتجات مطابقة للبحث الحالي.",
+  viewCart: "عرض السلة",
+  quickView: "عرض سريع",
+  addToCart: "أضف للسلة",
+  enquire: "استفسار",
+  details: "التفاصيل",
+  detailsKicker: "تفاصيل المنتج",
+  whatsappButton: "استفسار واتساب",
+  specifications: "المواصفات",
+  relatedProducts: "منتجات ذات صلة",
+  warrantyMonths: "ضمان {months} شهر",
+  sort: {
+    label: "الترتيب",
+    featured: "المميز",
+    priceAsc: "السعر: من الأقل للأعلى",
+    priceDesc: "السعر: من الأعلى للأقل",
+    name: "الاسم",
+  },
+  labels: {
+    product: "المنتج",
+    price: "السعر",
+    sku: "رمز المنتج",
+    availability: "التوفر",
+    compatibility: "التوافق",
+    warranty: "الضمان",
+  },
+  categories: {
+    braking: "نظام الفرامل",
+    suspension: "أجزاء التعليق",
+    mounts: "قواعد المحرك",
+    filtration: "الفلاتر",
+    steering: "أجزاء التوجيه",
+    drivetrain: "نقل الحركة",
+  },
+  availability: {
+    inStock: "متوفر",
+    limited: "كمية محدودة",
+    preOrder: "متاح عبر الاستفسار",
+  },
+  whatsapp: {
+    productIntro: "مرحباً BEROYA، أود الاستفسار عن هذا المنتج:",
+  },
+  products: {
+    "braking-system-pro": {
+      name: "نظام فرامل عالي الأداء",
+      shortDescription: "قرص وكليبر فرامل فاخران لهما قدرة توقف ثابتة وواثقة.",
+      compatibility: "سيارات سيدان وSUV ومنصات أداء بتوافق فرامل قريب من OEM.",
+      description:
+        "نظام فرامل دقيق صُمم لثبات حراري عالٍ، إحساس ثابت بالدواسة، وعمر تشغيلي طويل في ظروف الطرق الصعبة.",
+      specifications: [
+        ["المادة", "قرص من سبيكة كربونية عالية مع تجهيزات أداء مطلية"],
+        ["الاختبار", "تحقق حراري واهتزازي عبر دورات متعددة"],
+        ["التوافق", "هندسة متوافقة مع OEM للاستبدال المباشر"],
+        ["الاستخدام", "قيادة يومية وسفر وأداء"],
+      ],
+    },
+    "suspension-control-arm": {
+      name: "ذراع تعليق دقيق",
+      shortDescription: "هندسة تعليق ثابتة ومتينة لراحة وتحكم أعلى.",
+      compatibility: "منصات تعليق شائعة للسيارات الصغيرة والسيدان والكروس أوفر.",
+      description:
+        "نظام ذراع تعليق فاخر يحافظ على دقة الزوايا، يقلل قسوة الطريق، ويدعم التحكم الواثق.",
+      specifications: [
+        ["المادة", "هيكل فولاذي مطروق مع بوشات عالية الجودة"],
+        ["الاختبار", "اختبار إجهاد وتآكل وأحمال طريق"],
+        ["التوافق", "نقاط تركيب مباشرة بأسلوب OEM"],
+        ["الاستخدام", "راحة وثبات ومتانة للمسافات الطويلة"],
+      ],
+    },
+    "engine-mount-premium": {
+      name: "قاعدة محرك فاخرة",
+      shortDescription: "قاعدة مصممة لتقليل الاهتزاز وحماية محاذاة مجموعة الحركة.",
+      compatibility: "منصات محركات بنزين وديزل لتطبيقات سيدان وSUV.",
+      description:
+        "قاعدة محرك محسّنة بكثافة مطاط مدروسة وهيكل معزز لمنح المقصورة هدوءاً ودعماً موثوقاً للمحرك.",
+      specifications: [
+        ["المادة", "حامل فولاذي معزز مع قلب مطاطي مضبوط"],
+        ["الاختبار", "تحقق من الحمل والحرارة والاهتزاز"],
+        ["التوافق", "نقاط تركيب مخصصة حسب المنصة"],
+        ["الاستخدام", "تقليل الضوضاء والاهتزاز والخشونة"],
+      ],
+    },
+    "filtration-performance-kit": {
+      name: "طقم فلاتر أداء",
+      shortDescription: "حماية أنظف للهواء والسوائل لعمر محرك أطول.",
+      compatibility: "تطبيقات صيانة متعددة المنصات بأبعاد فلتر مطابقة.",
+      description:
+        "طقم فلاتر مطور لتدفق ثابت، تحكم دقيق بالجسيمات، وحماية موثوقة خلال فترات الصيانة الدورية.",
+      specifications: [
+        ["الوسيط", "وسيط ترشيح صناعي عالي الكفاءة"],
+        ["الاختبار", "تحقق من التدفق والضغط واحتجاز الجسيمات"],
+        ["التوافق", "أبعاد جاهزة للصيانة ومطابقة للتطبيق"],
+        ["الاستخدام", "صيانة دورية واعتمادية للأساطيل"],
+      ],
+    },
+    "steering-precision-link": {
+      name: "وصلة توجيه دقيقة",
+      shortDescription: "مكوّن توجيه سريع الاستجابة لدقة أعلى وثقة على الطريق.",
+      compatibility: "أنظمة توجيه للسيارات الصغيرة والسيدان وSUV والتجارية الخفيفة.",
+      description:
+        "مكوّن توجيه يحافظ على حركة دقيقة، يقلل الخلوص، ويدعم استجابة ثابتة للسيارة.",
+      specifications: [
+        ["المادة", "وصلة فولاذية معالجة حرارياً مع غطاء حماية محكم"],
+        ["الاختبار", "تحقق من الحركة والتآكل والصدمات"],
+        ["التوافق", "مخروط وقلاوظ بمواصفات OEM"],
+        ["الاستخدام", "دقة توجيه وثقة على الطريق"],
+      ],
+    },
+    "drivetrain-joint-assembly": {
+      name: "مجموعة وصلة نقل حركة",
+      shortDescription: "مكوّن لنقل القوة بسلاسة ومتانة تشغيلية عالية.",
+      compatibility: "تطبيقات نقل حركة أمامية وخلفية لمنصات ركاب شائعة.",
+      description:
+        "مجموعة نقل حركة مصممة لنقل العزم بثبات، تقليل الاهتزاز، وأداء موثوق لمسافات طويلة.",
+      specifications: [
+        ["المادة", "وصلة فولاذية مقساة مع غطاء حماية فاخر"],
+        ["الاختبار", "تحقق من العزم والزاوية والتحمل"],
+        ["التوافق", "هندسة مسننات ووصلة مخصصة حسب السيارة"],
+        ["الاستخدام", "نقل قوة سلس في الاستخدامات الصعبة"],
+      ],
+    },
+  },
+};
+
+dictionary.en.cart = {
+  kicker: "Cart",
+  title: "Selected components",
+  description: "Review quantities and prepare a professional order inquiry.",
+  empty: "Your cart is empty. Add premium components from the shop.",
+  quantity: "Quantity",
+  remove: "Remove",
+  summary: "Order summary",
+  items: "Items",
+  subtotal: "Subtotal",
+  checkout: "Continue to checkout",
+};
+
+dictionary.ar.cart = {
+  kicker: "السلة",
+  title: "المكونات المختارة",
+  description: "راجع الكميات وجهّز استفسار طلب احترافي.",
+  empty: "السلة فارغة. أضف مكونات فاخرة من المتجر.",
+  quantity: "الكمية",
+  remove: "إزالة",
+  summary: "ملخص الطلب",
+  items: "العناصر",
+  subtotal: "الإجمالي الفرعي",
+  checkout: "المتابعة لإتمام الطلب",
+};
+
+dictionary.en.checkout = {
+  kicker: "Checkout Inquiry",
+  title: "Send a fitment-ready order request.",
+  description:
+    "Share vehicle details so the BEROYA team can verify compatibility before confirming supply.",
+  customerInfo: "Customer information",
+  orderSummary: "Order summary",
+  whatsappIntro: "Hello BEROYA, I would like to submit this order inquiry:",
+  sendWhatsApp: "Send via WhatsApp",
+  saveInquiry: "Email inquiry",
+  emailSubject: "BEROYA Order Inquiry",
+  fields: {
+    fullName: "Full name",
+    phone: "Phone",
+    email: "Email",
+    city: "City",
+    carBrand: "Car brand",
+    carModel: "Car model",
+    year: "Year",
+    vin: "VIN number optional",
+    notes: "Notes",
+  },
+  placeholders: {
+    fullName: "Your full name",
+    phone: "+971 50 123 4567",
+    email: "name@example.com",
+    city: "Dubai",
+    carBrand: "Toyota, BMW, Mercedes...",
+    carModel: "Camry, X5, C-Class...",
+    year: "2022",
+    vin: "Optional chassis / VIN number",
+    notes: "Tell us about required quantities, fitment notes, or urgency.",
+  },
+};
+
+dictionary.ar.checkout = {
+  kicker: "استفسار إتمام الطلب",
+  title: "أرسل طلباً جاهزاً للتحقق من التوافق.",
+  description:
+    "شارك بيانات السيارة حتى يتمكن فريق BEROYA من تأكيد التوافق قبل اعتماد التوريد.",
+  customerInfo: "بيانات العميل",
+  orderSummary: "ملخص الطلب",
+  whatsappIntro: "مرحباً BEROYA، أود إرسال استفسار الطلب التالي:",
+  sendWhatsApp: "إرسال عبر واتساب",
+  saveInquiry: "إرسال بالبريد",
+  emailSubject: "استفسار طلب BEROYA",
+  fields: {
+    fullName: "الاسم الكامل",
+    phone: "رقم الهاتف",
+    email: "البريد الإلكتروني",
+    city: "المدينة",
+    carBrand: "ماركة السيارة",
+    carModel: "موديل السيارة",
+    year: "السنة",
+    vin: "رقم VIN اختياري",
+    notes: "ملاحظات",
+  },
+  placeholders: {
+    fullName: "اكتب الاسم الكامل",
+    phone: "+971 50 123 4567",
+    email: "name@example.com",
+    city: "دبي",
+    carBrand: "تويوتا، BMW، مرسيدس...",
+    carModel: "كامري، X5، C-Class...",
+    year: "2022",
+    vin: "رقم الهيكل / VIN اختياري",
+    notes: "اكتب الكميات المطلوبة أو ملاحظات التوافق أو درجة الاستعجال.",
+  },
+};

@@ -5,7 +5,7 @@ import Footer from "../sections/Footer";
 import Hero from "../sections/Hero";
 import Manufacturing from "../sections/Manufacturing";
 import Navbar from "../sections/Navbar";
-import Products from "../sections/Products";
+import Shop from "../sections/Shop";
 import Quality from "../sections/Quality";
 import Technology from "../sections/Technology";
 import Values from "../sections/Values";
@@ -29,7 +29,7 @@ export default function HomePage() {
         <Difference />
         <Technology />
         <Manufacturing />
-        <Products />
+        <Shop />
         <Quality />
         <Contact />
       </main>

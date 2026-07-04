@@ -168,7 +168,7 @@ export default function Hero() {
           </Motion.p>
 
           <Motion.div className="hero__actions" variants={reduceMotion ? {} : lineVariants}>
-            <a className="button button--gold" href="#products">
+            <a className="button button--gold" href="#shop">
               {content.hero.primary}
               <ArrowRight aria-hidden="true" size={17} />
             </a>

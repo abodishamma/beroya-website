@@ -1,10 +1,13 @@
 import HomePage from "./pages/HomePage";
+import { CartProvider } from "./context/CartProvider";
 import { LanguageProvider } from "./context/LanguageProvider";
 
 export default function App() {
   return (
     <LanguageProvider>
-      <HomePage />
+      <CartProvider>
+        <HomePage />
+      </CartProvider>
     </LanguageProvider>
   );
 }

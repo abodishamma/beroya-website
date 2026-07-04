@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion as Motion, useReducedMotion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingCart, X } from "lucide-react";
 import Brand from "../components/Brand";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../hooks/useLanguage";
 import { navigation } from "../data/siteData";
 import { useScrolled } from "../hooks/useScrolled";
 import { smoothScrollToHash } from "../utils/smoothScroll";
 
 export default function Navbar() {
-  const { content, language, toggleLanguage } = useLanguage();
+  const { content } = useLanguage();
+  const { totalQuantity } = useCart();
   const scrolled = useScrolled(18);
   const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -124,19 +127,16 @@ export default function Navbar() {
         </nav>
 
         <div className="nav__actions">
-          <button
-            className="language-toggle"
-            type="button"
-            aria-label={content.nav.aria}
-            onClick={toggleLanguage}
-          >
-            <span className={language === "en" ? "is-active" : ""}>{content.nav.englishLabel}</span>
-            <i aria-hidden="true" />
-            <span className={language === "ar" ? "is-active" : ""}>{content.nav.arabicLabel}</span>
-          </button>
+          <LanguageSwitcher />
 
-          <a className="nav__cta" href="#contact" onClick={(event) => handleAnchorClick(event, "#contact")}>
-            <span>{content.nav.cta}</span>
+          <a className="nav__cart" href="#cart" onClick={(event) => handleAnchorClick(event, "#cart")}>
+            <ShoppingCart aria-hidden="true" size={15} />
+            <span>{content.nav.cart}</span>
+            <b>{totalQuantity}</b>
+          </a>
+
+          <a className="nav__cta" href="#checkout" onClick={(event) => handleAnchorClick(event, "#checkout")}>
+            <span>{content.nav.checkout}</span>
             <i aria-hidden="true" />
           </a>
         </div>
@@ -179,13 +179,9 @@ export default function Navbar() {
                 </a>
               ))}
             </nav>
-            <button className="mobile-nav__language" type="button" onClick={toggleLanguage}>
-              {content.nav.englishLabel}
-              <i aria-hidden="true" />
-              {content.nav.arabicLabel}
-            </button>
-            <a className="mobile-nav__cta" href="#contact" onClick={(event) => handleAnchorClick(event, "#contact")}>
-              {content.nav.mobileCta}
+            <LanguageSwitcher className="mobile-nav__language" />
+            <a className="mobile-nav__cta" href="#checkout" onClick={(event) => handleAnchorClick(event, "#checkout")}>
+              {content.nav.checkout}
             </a>
           </Motion.div>
         )}

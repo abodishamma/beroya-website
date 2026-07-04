@@ -18,11 +18,11 @@ import drivetrainImage from "../assets/reference-redesign/drivetrain-parts.webp"
 
 export const navigation = [
   { key: "home", href: "#top" },
-  { key: "about", href: "#about" },
-  { key: "technology", href: "#technology" },
-  { key: "manufacturing", href: "#manufacturing" },
-  { key: "products", href: "#products" },
-  { key: "quality", href: "#quality" },
+  { key: "shop", href: "#shop" },
+  { key: "categories", href: "#categories" },
+  { key: "search", href: "#search" },
+  { key: "cart", href: "#cart" },
+  { key: "checkout", href: "#checkout" },
   { key: "contact", href: "#contact" },
 ];
 
