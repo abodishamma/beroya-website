@@ -1,5 +1,6 @@
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Eye, MessageCircle, ShoppingBag } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { formatPrice, formatWarranty } from "../../utils/formatters";
 import { createProductWhatsAppUrl } from "../../utils/whatsapp";
 import { useCart } from "../../hooks/useCart";
@@ -9,7 +10,23 @@ export default function ProductCard({ product, copy, onView }) {
   const { content, language } = useLanguage();
   const { addItem } = useCart();
   const reduceMotion = useReducedMotion();
+  const [justAdded, setJustAdded] = useState(false);
+  const addedTimer = useRef(0);
   const price = formatPrice(product.price, language);
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(addedTimer.current);
+    },
+    [],
+  );
+
+  const handleAddToCart = () => {
+    addItem(product.id);
+    setJustAdded(true);
+    window.clearTimeout(addedTimer.current);
+    addedTimer.current = window.setTimeout(() => setJustAdded(false), 1300);
+  };
 
   return (
     <Motion.article
@@ -50,9 +67,13 @@ export default function ProductCard({ product, copy, onView }) {
         </dl>
 
         <div className="shop-card__actions">
-          <button className="button button--gold" type="button" onClick={() => addItem(product.id)}>
+          <button
+            className={`button button--gold ${justAdded ? "is-success" : ""}`}
+            type="button"
+            onClick={handleAddToCart}
+          >
             <ShoppingBag aria-hidden="true" size={16} />
-            {content.shop.addToCart}
+            {justAdded ? content.shop.addedToCart : content.shop.addToCart}
           </button>
           <button className="button button--outline" type="button" onClick={() => onView(product.id)}>
             {content.shop.details}

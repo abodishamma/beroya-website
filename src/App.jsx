@@ -1,4 +1,5 @@
 import HomePage from "./pages/HomePage";
+import CartToast from "./components/shop/CartToast";
 import { CartProvider } from "./context/CartProvider";
 import { LanguageProvider } from "./context/LanguageProvider";
 import About from "./sections/About";
@@ -38,6 +39,7 @@ function RoutedSite() {
       <main id="main-content" key={route.key}>
         {pages[route.page] ?? pages.home}
       </main>
+      <CartToast />
       <Footer />
     </>
   );

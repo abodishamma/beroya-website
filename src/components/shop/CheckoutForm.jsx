@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
-import { MessageCircle, Send } from "lucide-react";
+import { CreditCard, ExternalLink, LockKeyhole, MessageCircle, Send, ShieldCheck } from "lucide-react";
 import { formatPrice } from "../../utils/formatters";
-import { createOrderWhatsAppUrl } from "../../utils/whatsapp";
+import { createCardPaymentUrl, isCardPaymentReady } from "../../utils/payment";
+import { createOrderWhatsAppUrl, createPaymentLinkWhatsAppUrl } from "../../utils/whatsapp";
 import { navigateToRoute } from "../../utils/routes";
 import { useCart } from "../../hooks/useCart";
 import { useLanguage } from "../../hooks/useLanguage";
@@ -22,7 +23,6 @@ export default function CheckoutForm({ productCopies }) {
   const { content, language } = useLanguage();
   const { enrichedItems, subtotal } = useCart();
   const [fields, setFields] = useState(initialFields);
-  const [submitTarget, setSubmitTarget] = useState("whatsapp");
 
   const summaryItems = useMemo(
     () =>
@@ -36,7 +36,20 @@ export default function CheckoutForm({ productCopies }) {
   );
 
   const total = formatPrice(subtotal, language);
+  const cardGatewayReady = isCardPaymentReady();
+  const cardPaymentUrl = createCardPaymentUrl({
+    fields,
+    items: summaryItems,
+    language,
+    total,
+  });
   const whatsappUrl = createOrderWhatsAppUrl({
+    content,
+    fields,
+    items: summaryItems,
+    total,
+  });
+  const paymentLinkUrl = createPaymentLinkWhatsAppUrl({
     content,
     fields,
     items: summaryItems,
@@ -61,7 +74,7 @@ export default function CheckoutForm({ productCopies }) {
       content.checkout.orderSummary,
       ...summaryItems.map(
         ({ product, copy, quantity, lineTotal }) =>
-          `${copy.name} × ${quantity} — ${product.sku} — ${lineTotal}`,
+          `${copy.name} x ${quantity} — ${product.sku} — ${lineTotal}`,
       ),
       `${content.cart.subtotal}: ${total}`,
     ].join("\n"),
@@ -73,18 +86,29 @@ export default function CheckoutForm({ productCopies }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const target = event.nativeEvent?.submitter?.dataset?.target || "card";
 
     if (!summaryItems.length) {
       navigateToRoute("cart");
       return;
     }
 
-    if (submitTarget === "email") {
+    if (target === "email") {
       window.location.href = emailUrl;
       return;
     }
 
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    if (target === "whatsapp") {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    if (cardGatewayReady && cardPaymentUrl) {
+      window.location.href = cardPaymentUrl;
+      return;
+    }
+
+    window.open(paymentLinkUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -118,6 +142,32 @@ export default function CheckoutForm({ productCopies }) {
               )}
             </label>
           ))}
+
+          <div className="payment-panel is-wide">
+            <div className="payment-panel__top">
+              <span className="section-kicker">{content.checkout.payment.kicker}</span>
+              <strong>{content.checkout.payment.title}</strong>
+              <small className={cardGatewayReady ? "is-ready" : ""}>
+                {cardGatewayReady
+                  ? content.checkout.payment.gatewayReady
+                  : content.checkout.payment.gatewayPending}
+              </small>
+            </div>
+
+            <div className="payment-card-preview" aria-hidden="true">
+              <div>
+                <CreditCard size={20} />
+                <span>{content.checkout.payment.cardMethod}</span>
+              </div>
+              <strong>•••• •••• •••• 4242</strong>
+              <small>{content.checkout.payment.acceptedCards}</small>
+            </div>
+
+            <p>
+              <LockKeyhole aria-hidden="true" size={15} />
+              {content.checkout.payment.note}
+            </p>
+          </div>
         </form>
 
         <aside className="checkout-summary">
@@ -135,22 +185,41 @@ export default function CheckoutForm({ productCopies }) {
             <span>{content.cart.subtotal}</span>
             <strong>{total}</strong>
           </div>
+
+          <div className="checkout-secure">
+            <ShieldCheck aria-hidden="true" size={17} />
+            <span>{content.checkout.payment.secure}</span>
+          </div>
+
           <button
             className={`button button--gold ${!summaryItems.length ? "is-disabled" : ""}`}
             type="submit"
             form="checkout-form"
+            data-target="card"
             disabled={!summaryItems.length}
-            onClick={() => setSubmitTarget("whatsapp")}
           >
-            <MessageCircle aria-hidden="true" size={17} />
-            {content.checkout.sendWhatsApp}
+            <CreditCard aria-hidden="true" size={17} />
+            {cardGatewayReady ? content.checkout.payment.payCard : content.checkout.payment.requestLink}
+            {cardGatewayReady && <ExternalLink aria-hidden="true" size={14} />}
           </button>
+
           <button
             className="button button--outline"
             type="submit"
             form="checkout-form"
+            data-target="whatsapp"
             disabled={!summaryItems.length}
-            onClick={() => setSubmitTarget("email")}
+          >
+            <MessageCircle aria-hidden="true" size={17} />
+            {content.checkout.sendWhatsApp}
+          </button>
+
+          <button
+            className="button button--outline checkout-summary__email"
+            type="submit"
+            form="checkout-form"
+            data-target="email"
+            disabled={!summaryItems.length}
           >
             <Send aria-hidden="true" size={15} />
             {content.checkout.saveInquiry}

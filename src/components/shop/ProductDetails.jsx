@@ -1,4 +1,5 @@
 import { ArrowUpRight, MessageCircle, ShoppingBag, ShieldCheck } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { getRelatedProducts } from "../../data/shopProducts";
 import { formatPrice, formatWarranty } from "../../utils/formatters";
 import { createProductWhatsAppUrl } from "../../utils/whatsapp";
@@ -8,12 +9,28 @@ import { useLanguage } from "../../hooks/useLanguage";
 export default function ProductDetails({ product, productCopies, onView }) {
   const { content, language } = useLanguage();
   const { addItem } = useCart();
+  const [justAdded, setJustAdded] = useState(false);
+  const addedTimer = useRef(0);
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(addedTimer.current);
+    },
+    [],
+  );
 
   if (!product) return null;
 
   const copy = productCopies[product.id];
   const price = formatPrice(product.price, language);
   const related = getRelatedProducts(product, 3);
+
+  const handleAddToCart = () => {
+    addItem(product.id);
+    setJustAdded(true);
+    window.clearTimeout(addedTimer.current);
+    addedTimer.current = window.setTimeout(() => setJustAdded(false), 1300);
+  };
 
   return (
     <section className="product-detail" id="product-details" aria-labelledby="product-detail-title">
@@ -48,9 +65,13 @@ export default function ProductDetails({ product, productCopies, onView }) {
         </dl>
 
         <div className="product-detail__actions">
-          <button className="button button--gold" type="button" onClick={() => addItem(product.id)}>
+          <button
+            className={`button button--gold ${justAdded ? "is-success" : ""}`}
+            type="button"
+            onClick={handleAddToCart}
+          >
             <ShoppingBag aria-hidden="true" size={17} />
-            {content.shop.addToCart}
+            {justAdded ? content.shop.addedToCart : content.shop.addToCart}
           </button>
           <a
             className="button button--outline"

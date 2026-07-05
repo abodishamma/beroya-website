@@ -11,10 +11,11 @@ import { getRouteHref } from "../utils/routes";
 
 export default function Navbar({ currentPage = "home" }) {
   const { content } = useLanguage();
-  const { totalQuantity } = useCart();
+  const { lastAddedItem, totalQuantity } = useCart();
   const scrolled = useScrolled(18);
   const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartPulse, setCartPulse] = useState(false);
   const progressRef = useRef(null);
   const activePage = currentPage === "product" ? "shop" : currentPage;
 
@@ -59,6 +60,19 @@ export default function Navbar({ currentPage = "home" }) {
       window.removeEventListener("resize", scheduleProgress);
     };
   }, []);
+
+  useEffect(() => {
+    if (!lastAddedItem) return undefined;
+
+    setCartPulse(false);
+    const frame = window.requestAnimationFrame(() => setCartPulse(true));
+    const timer = window.setTimeout(() => setCartPulse(false), 780);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+    };
+  }, [lastAddedItem]);
 
   const handleRouteClick = (event) => {
     if (
@@ -107,7 +121,13 @@ export default function Navbar({ currentPage = "home" }) {
           <LanguageSwitcher />
 
           <a
-            className={`nav__cart ${activePage === "cart" ? "is-active" : ""}`}
+            className={[
+              "nav__cart",
+              activePage === "cart" ? "is-active" : "",
+              cartPulse ? "is-bumping" : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
             href={getRouteHref("cart")}
             onClick={handleRouteClick}
           >

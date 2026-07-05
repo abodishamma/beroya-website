@@ -371,6 +371,7 @@ dictionary.en.shop = {
   specifications: "Specifications",
   relatedProducts: "Related products",
   warrantyMonths: "{months}-month warranty",
+  addedToCart: "Added",
   sort: {
     label: "Sort",
     featured: "Featured",
@@ -510,6 +511,7 @@ dictionary.ar.shop = {
   specifications: "المواصفات",
   relatedProducts: "منتجات ذات صلة",
   warrantyMonths: "ضمان {months} شهر",
+  addedToCart: "تمت الإضافة",
   sort: {
     label: "الترتيب",
     featured: "المميز",
@@ -628,6 +630,8 @@ dictionary.en.cart = {
   title: "Selected components",
   description: "Review quantities and prepare a professional order inquiry.",
   empty: "Your cart is empty. Add premium components from the shop.",
+  addedLabel: "Added to cart",
+  dismissAdded: "Dismiss cart notification",
   quantity: "Quantity",
   remove: "Remove",
   summary: "Order summary",
@@ -641,6 +645,8 @@ dictionary.ar.cart = {
   title: "المكونات المختارة",
   description: "راجع الكميات وجهّز استفسار طلب احترافي.",
   empty: "السلة فارغة. أضف مكونات فاخرة من المتجر.",
+  addedLabel: "تمت الإضافة للسلة",
+  dismissAdded: "إغلاق إشعار السلة",
   quantity: "الكمية",
   remove: "إزالة",
   summary: "ملخص الطلب",
@@ -660,6 +666,21 @@ dictionary.en.checkout = {
   sendWhatsApp: "Send via WhatsApp",
   saveInquiry: "Email inquiry",
   emailSubject: "BEROYA Order Inquiry",
+  payment: {
+    kicker: "Secure Payment",
+    title: "Pay by card through a certified gateway.",
+    cardMethod: "Card payment",
+    acceptedCards: "Visa / Mastercard / Apple Pay ready",
+    gatewayReady: "Gateway connected",
+    gatewayPending: "Gateway link pending",
+    note:
+      "Card details are never collected on this website. Customers are redirected to a certified payment provider.",
+    secure: "Secure checkout prepared for card payment",
+    payCard: "Pay securely by card",
+    requestLink: "Request secure card payment link",
+    linkRequestIntro:
+      "Hello BEROYA, I would like to receive a secure card payment link for this order:",
+  },
   fields: {
     fullName: "Full name",
     phone: "Phone",
@@ -695,6 +716,21 @@ dictionary.ar.checkout = {
   sendWhatsApp: "إرسال عبر واتساب",
   saveInquiry: "إرسال بالبريد",
   emailSubject: "استفسار طلب BEROYA",
+  payment: {
+    kicker: "دفع آمن",
+    title: "الدفع بالبطاقة عبر بوابة دفع معتمدة.",
+    cardMethod: "الدفع بالبطاقة",
+    acceptedCards: "جاهز لبطاقات Visa / Mastercard / Apple Pay",
+    gatewayReady: "بوابة الدفع متصلة",
+    gatewayPending: "رابط بوابة الدفع غير مضاف بعد",
+    note:
+      "لا يتم جمع بيانات البطاقة داخل الموقع. يتم تحويل العميل إلى مزود دفع معتمد لإتمام العملية.",
+    secure: "Checkout آمن ومجهز للدفع بالبطاقة",
+    payCard: "ادفع بأمان بالبطاقة",
+    requestLink: "طلب رابط دفع آمن بالبطاقة",
+    linkRequestIntro:
+      "مرحباً BEROYA، أود الحصول على رابط دفع آمن بالبطاقة لهذا الطلب:",
+  },
   fields: {
     fullName: "الاسم الكامل",
     phone: "رقم الهاتف",

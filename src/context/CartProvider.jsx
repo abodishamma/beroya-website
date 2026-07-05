@@ -23,6 +23,7 @@ function loadCart() {
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState(loadCart);
+  const [lastAddedItem, setLastAddedItem] = useState(null);
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify(items));
@@ -30,6 +31,9 @@ export function CartProvider({ children }) {
 
   const value = useMemo(() => {
     const addItem = (productId, quantity = 1) => {
+      const product = getProductById(productId);
+      if (!product) return;
+
       setItems((current) => {
         const existing = current.find((item) => item.productId === productId);
         if (existing) {
@@ -40,6 +44,12 @@ export function CartProvider({ children }) {
           );
         }
         return [...current, { productId, quantity }];
+      });
+      setLastAddedItem({
+        product,
+        productId,
+        quantity,
+        nonce: `${productId}-${Date.now()}`,
       });
     };
 
@@ -57,6 +67,7 @@ export function CartProvider({ children }) {
     };
 
     const clearCart = () => setItems([]);
+    const dismissAddedItem = () => setLastAddedItem(null);
 
     const enrichedItems = items
       .map((item) => ({
@@ -76,12 +87,14 @@ export function CartProvider({ children }) {
       enrichedItems,
       totalQuantity,
       subtotal,
+      lastAddedItem,
       addItem,
       removeItem,
       setQuantity,
       clearCart,
+      dismissAddedItem,
     };
-  }, [items]);
+  }, [items, lastAddedItem]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
