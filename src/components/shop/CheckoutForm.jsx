@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { MessageCircle, Send } from "lucide-react";
 import { formatPrice } from "../../utils/formatters";
 import { createOrderWhatsAppUrl } from "../../utils/whatsapp";
+import { navigateToRoute } from "../../utils/routes";
 import { useCart } from "../../hooks/useCart";
 import { useLanguage } from "../../hooks/useLanguage";
 
@@ -74,7 +75,7 @@ export default function CheckoutForm({ productCopies }) {
     event.preventDefault();
 
     if (!summaryItems.length) {
-      window.location.hash = "cart";
+      navigateToRoute("cart");
       return;
     }
 

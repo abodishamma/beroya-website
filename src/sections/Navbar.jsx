@@ -7,16 +7,16 @@ import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../hooks/useLanguage";
 import { navigation } from "../data/siteData";
 import { useScrolled } from "../hooks/useScrolled";
-import { smoothScrollToHash } from "../utils/smoothScroll";
+import { getRouteHref } from "../utils/routes";
 
-export default function Navbar() {
+export default function Navbar({ currentPage = "home" }) {
   const { content } = useLanguage();
   const { totalQuantity } = useCart();
   const scrolled = useScrolled(18);
   const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("top");
   const progressRef = useRef(null);
+  const activePage = currentPage === "product" ? "shop" : currentPage;
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -31,27 +31,6 @@ export default function Navbar() {
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [menuOpen]);
-
-  useEffect(() => {
-    const sectionIds = navigation.map((item) => item.href.slice(1));
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visible?.target?.id) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-28% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -81,7 +60,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleAnchorClick = (event, href) => {
+  const handleRouteClick = (event) => {
     if (
       event.metaKey ||
       event.ctrlKey ||
@@ -91,7 +70,6 @@ export default function Navbar() {
       return;
     }
 
-    if (smoothScrollToHash(href)) event.preventDefault();
     setMenuOpen(false);
   };
 
@@ -110,15 +88,14 @@ export default function Navbar() {
 
         <nav className="nav__links" aria-label={content.nav.primaryNavigation}>
           {navigation.map((item) => {
-            const id = item.href.slice(1);
-            const active = activeSection === id;
+            const active = activePage === item.page;
             return (
               <a
                 className={active ? "is-active" : ""}
                 href={item.href}
                 key={item.key}
                 aria-current={active ? "page" : undefined}
-                onClick={(event) => handleAnchorClick(event, item.href)}
+                onClick={handleRouteClick}
               >
                 {content.nav[item.key]}
               </a>
@@ -129,13 +106,17 @@ export default function Navbar() {
         <div className="nav__actions">
           <LanguageSwitcher />
 
-          <a className="nav__cart" href="#cart" onClick={(event) => handleAnchorClick(event, "#cart")}>
+          <a
+            className={`nav__cart ${activePage === "cart" ? "is-active" : ""}`}
+            href={getRouteHref("cart")}
+            onClick={handleRouteClick}
+          >
             <ShoppingCart aria-hidden="true" size={15} />
             <span>{content.nav.cart}</span>
             <b>{totalQuantity}</b>
           </a>
 
-          <a className="nav__cta" href="#checkout" onClick={(event) => handleAnchorClick(event, "#checkout")}>
+          <a className="nav__cta" href={getRouteHref("checkout")} onClick={handleRouteClick}>
             <span>{content.nav.checkout}</span>
             <i aria-hidden="true" />
           </a>
@@ -172,7 +153,7 @@ export default function Navbar() {
                 <a
                   href={item.href}
                   key={item.key}
-                  onClick={(event) => handleAnchorClick(event, item.href)}
+                  onClick={handleRouteClick}
                 >
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   {content.nav[item.key]}
@@ -180,7 +161,7 @@ export default function Navbar() {
               ))}
             </nav>
             <LanguageSwitcher className="mobile-nav__language" />
-            <a className="mobile-nav__cta" href="#checkout" onClick={(event) => handleAnchorClick(event, "#checkout")}>
+            <a className="mobile-nav__cta" href={getRouteHref("checkout")} onClick={handleRouteClick}>
               {content.nav.checkout}
             </a>
           </Motion.div>

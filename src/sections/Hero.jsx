@@ -10,6 +10,7 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import heroImage from "../assets/reference-redesign/hero-components.webp";
 import brandMark from "../assets/beroya-mark-2026-transparent.png";
 import { useLanguage } from "../hooks/useLanguage";
+import { getRouteHref } from "../utils/routes";
 
 const lineVariants = {
   hidden: { opacity: 0, y: 34, filter: "blur(8px)" },
@@ -168,11 +169,11 @@ export default function Hero() {
           </Motion.p>
 
           <Motion.div className="hero__actions" variants={reduceMotion ? {} : lineVariants}>
-            <a className="button button--gold" href="#shop">
+            <a className="button button--gold" href={getRouteHref("shop")}>
               {content.hero.primary}
               <ArrowRight aria-hidden="true" size={17} />
             </a>
-            <a className="button button--outline" href="#technology">
+            <a className="button button--outline" href={getRouteHref("technology")}>
               {content.hero.secondary}
             </a>
           </Motion.div>
@@ -185,7 +186,7 @@ export default function Hero() {
         </Motion.div>
       </div>
 
-      <a className="hero__scroll" href="#principles">
+      <a className="hero__scroll" href={getRouteHref("about")}>
         <span>{content.hero.scroll}</span>
         <i aria-hidden="true" />
         <ArrowDown aria-hidden="true" size={14} />

@@ -1,8 +1,15 @@
 import { ArrowUpRight, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Brand from "../components/Brand";
 import { useLanguage } from "../hooks/useLanguage";
+import { getRouteHref } from "../utils/routes";
 
-const companyHrefs = ["#about", "#technology", "#manufacturing", "#quality", "#contact"];
+const companyHrefs = [
+  getRouteHref("about"),
+  getRouteHref("technology"),
+  getRouteHref("manufacturing"),
+  getRouteHref("quality"),
+  getRouteHref("contact"),
+];
 
 function mailSubject(subject) {
   return `mailto:info@beroyaauto.com?subject=${encodeURIComponent(subject)}`;
@@ -58,7 +65,7 @@ export default function Footer() {
       <div className="container footer__topline">
         <span>{content.footer.topline[0]}</span>
         <span>{content.footer.topline[1]}</span>
-        <a href="#top">
+        <a href={getRouteHref("home")}>
           {content.footer.topline[2]}
           <ArrowUpRight aria-hidden="true" size={15} />
         </a>

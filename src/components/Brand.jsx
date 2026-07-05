@@ -7,7 +7,7 @@ export default function Brand({ className = "", priority = false }) {
   return (
     <a
       className={`brand-lockup ${className}`}
-      href="#top"
+      href="#/"
       aria-label={content.accessibility.brandBackToTop}
     >
       <img

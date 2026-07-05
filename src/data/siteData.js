@@ -17,13 +17,13 @@ import steeringImage from "../assets/reference-redesign/steering-parts.webp";
 import drivetrainImage from "../assets/reference-redesign/drivetrain-parts.webp";
 
 export const navigation = [
-  { key: "home", href: "#top" },
-  { key: "shop", href: "#shop" },
-  { key: "categories", href: "#categories" },
-  { key: "search", href: "#search" },
-  { key: "cart", href: "#cart" },
-  { key: "checkout", href: "#checkout" },
-  { key: "contact", href: "#contact" },
+  { key: "home", page: "home", href: "#/" },
+  { key: "shop", page: "shop", href: "#/shop" },
+  { key: "about", page: "about", href: "#/about" },
+  { key: "technology", page: "technology", href: "#/technology" },
+  { key: "manufacturing", page: "manufacturing", href: "#/manufacturing" },
+  { key: "quality", page: "quality", href: "#/quality" },
+  { key: "contact", page: "contact", href: "#/contact" },
 ];
 
 export const values = [

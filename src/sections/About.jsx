@@ -2,6 +2,7 @@ import { motion as Motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import aboutImage from "../assets/reference-redesign/about-caliper-branded.webp";
 import { useLanguage } from "../hooks/useLanguage";
+import { getRouteHref } from "../utils/routes";
 
 export default function About() {
   const { content } = useLanguage();
@@ -43,7 +44,7 @@ export default function About() {
             <span key={principle}>{principle}</span>
           ))}
         </div>
-        <a className="button button--outline" href="#technology">
+        <a className="button button--outline" href={getRouteHref("technology")}>
           {content.about.cta}
           <ArrowRight aria-hidden="true" size={17} />
         </a>

@@ -1,5 +1,6 @@
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react";
 import { formatPrice } from "../../utils/formatters";
+import { getRouteHref } from "../../utils/routes";
 import { useCart } from "../../hooks/useCart";
 import { useLanguage } from "../../hooks/useLanguage";
 
@@ -62,7 +63,7 @@ export default function CartPage({ productCopies }) {
             <span>{content.cart.subtotal}</span>
             <strong>{formatPrice(subtotal, language)}</strong>
           </div>
-          <a className="button button--gold" href="#checkout">
+          <a className="button button--gold" href={getRouteHref("checkout")}>
             {content.cart.checkout}
           </a>
         </aside>

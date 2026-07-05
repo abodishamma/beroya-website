@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, PackageSearch, ShoppingBag } from "lucide-react";
 import ProductFilters from "../components/shop/ProductFilters";
@@ -7,22 +7,22 @@ import ProductDetails from "../components/shop/ProductDetails";
 import CartPage from "../components/shop/CartPage";
 import CheckoutForm from "../components/shop/CheckoutForm";
 import { productCatalog } from "../data/shopProducts";
-import { getHashTarget, smoothScrollToHash } from "../utils/smoothScroll";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../hooks/useLanguage";
+import { getRouteHref, navigateToRoute } from "../utils/routes";
+import { useState } from "react";
 
 function normalize(value) {
   return value.toLocaleLowerCase().trim();
 }
 
-export default function Shop() {
+export default function Shop({ mode = "catalog", productId }) {
   const { content } = useLanguage();
   const { totalQuantity } = useCart();
   const reduceMotion = useReducedMotion();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("featured");
-  const [selectedProductId, setSelectedProductId] = useState(productCatalog[0].id);
 
   const productCopies = content.shop.products;
 
@@ -53,80 +53,83 @@ export default function Shop() {
   }, [content.shop.categories, productCopies, query, selectedCategory, sort]);
 
   const selectedProduct =
-    productCatalog.find((product) => product.id === selectedProductId) ?? filteredProducts[0] ?? productCatalog[0];
+    productCatalog.find((product) => product.id === productId) ?? filteredProducts[0] ?? productCatalog[0];
 
   const viewProduct = (productId) => {
-    setSelectedProductId(productId);
-    window.requestAnimationFrame(() => {
-      if (getHashTarget("#product-details")) smoothScrollToHash("#product-details");
-    });
+    navigateToRoute("product", { productId });
   };
 
   return (
-    <section className="shop" id="shop" aria-labelledby="shop-title">
+    <section className={`shop shop--${mode}`} id="shop" aria-labelledby="shop-title">
       <div className="container shop__inner">
-        <Motion.div
-          className="shop__hero"
-          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div>
-            <span className="section-kicker">{content.shop.kicker}</span>
-            <h2 id="shop-title">
-              {content.shop.title[0]}
-              <em>{content.shop.title[1]}</em>
-            </h2>
-            <p>{content.shop.description}</p>
-          </div>
+        {mode === "catalog" && (
+          <>
+            <Motion.div
+              className="shop__hero"
+              initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div>
+                <span className="section-kicker">{content.shop.kicker}</span>
+                <h2 id="shop-title">
+                  {content.shop.title[0]}
+                  <em>{content.shop.title[1]}</em>
+                </h2>
+                <p>{content.shop.description}</p>
+              </div>
 
-          <div className="shop__stats" aria-label={content.shop.storeStatsLabel}>
-            <span>
-              <PackageSearch aria-hidden="true" size={18} />
-              {productCatalog.length} {content.shop.storeStats.products}
-            </span>
-            <span>
-              <ShoppingBag aria-hidden="true" size={18} />
-              {totalQuantity} {content.shop.storeStats.cart}
-            </span>
-          </div>
-        </Motion.div>
+              <div className="shop__stats" aria-label={content.shop.storeStatsLabel}>
+                <span>
+                  <PackageSearch aria-hidden="true" size={18} />
+                  {productCatalog.length} {content.shop.storeStats.products}
+                </span>
+                <span>
+                  <ShoppingBag aria-hidden="true" size={18} />
+                  {totalQuantity} {content.shop.storeStats.cart}
+                </span>
+              </div>
+            </Motion.div>
 
-        <ProductFilters
-          content={content}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-          query={query}
-          onQueryChange={setQuery}
-          sort={sort}
-          onSortChange={setSort}
-        />
+            <ProductFilters
+              content={content}
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+              query={query}
+              onQueryChange={setQuery}
+              sort={sort}
+              onSortChange={setSort}
+            />
 
-        <div className="shop__bar" id="products">
-          <span>{content.shop.showing.replace("{count}", filteredProducts.length)}</span>
-          <a href="#cart">
-            {content.shop.viewCart}
-            <ArrowRight aria-hidden="true" size={15} />
-          </a>
-        </div>
+            <div className="shop__bar" id="products">
+              <span>{content.shop.showing.replace("{count}", filteredProducts.length)}</span>
+              <a href={getRouteHref("cart")}>
+                {content.shop.viewCart}
+                <ArrowRight aria-hidden="true" size={15} />
+              </a>
+            </div>
 
-        <ProductGrid
-          products={filteredProducts}
-          productCopies={productCopies}
-          onView={viewProduct}
-          emptyLabel={content.shop.empty}
-        />
+            <ProductGrid
+              products={filteredProducts}
+              productCopies={productCopies}
+              onView={viewProduct}
+              emptyLabel={content.shop.empty}
+            />
+          </>
+        )}
 
-        <ProductDetails
-          product={selectedProduct}
-          productCopies={productCopies}
-          onView={viewProduct}
-        />
+        {mode === "detail" && (
+          <ProductDetails
+            product={selectedProduct}
+            productCopies={productCopies}
+            onView={viewProduct}
+          />
+        )}
 
-        <CartPage productCopies={productCopies} />
+        {mode === "cart" && <CartPage productCopies={productCopies} />}
 
-        <CheckoutForm productCopies={productCopies} />
+        {mode === "checkout" && <CheckoutForm productCopies={productCopies} />}
       </div>
     </section>
   );
