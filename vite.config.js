@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import process from "node:process";
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === "true" ? "/beroya-website/" : "/",
+  base: process.env.GITHUB_PAGES === "true" ? "./" : "/",
   plugins: [react(), tailwindcss()],
   build: {
     target: "es2022",
