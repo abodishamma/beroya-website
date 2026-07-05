@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion as Motion, useReducedMotion } from "framer-motion";
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Menu, ShoppingCart, UserCircle, X } from "lucide-react";
 import Brand from "../components/Brand";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useCart } from "../hooks/useCart";
@@ -119,6 +119,20 @@ export default function Navbar({ currentPage = "home" }) {
 
         <div className="nav__actions">
           <LanguageSwitcher />
+
+          <a
+            className={[
+              "nav__account",
+              activePage === "account" ? "is-active" : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            href={getRouteHref("account")}
+            onClick={handleRouteClick}
+          >
+            <UserCircle aria-hidden="true" size={15} />
+            <span>{content.nav.account}</span>
+          </a>
 
           <a
             className={[

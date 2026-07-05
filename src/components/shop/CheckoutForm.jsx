@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CreditCard, ExternalLink, LockKeyhole, MessageCircle, Send, ShieldCheck } from "lucide-react";
 import { formatPrice } from "../../utils/formatters";
 import { createCardPaymentUrl, isCardPaymentReady } from "../../utils/payment";
 import { createOrderWhatsAppUrl, createPaymentLinkWhatsAppUrl } from "../../utils/whatsapp";
 import { navigateToRoute } from "../../utils/routes";
+import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
+import { useCommerce } from "../../hooks/useCommerce";
 import { useLanguage } from "../../hooks/useLanguage";
 
 const initialFields = {
@@ -21,8 +23,27 @@ const initialFields = {
 
 export default function CheckoutForm({ productCopies }) {
   const { content, language } = useLanguage();
-  const { enrichedItems, subtotal } = useCart();
+  const { currentCustomer } = useAuth();
+  const { createOrder } = useCommerce();
+  const { clearCart, enrichedItems, subtotal } = useCart();
   const [fields, setFields] = useState(initialFields);
+  const [submittedOrderId, setSubmittedOrderId] = useState("");
+
+  useEffect(() => {
+    if (!currentCustomer) return;
+
+    setFields((current) => ({
+      ...current,
+      fullName: current.fullName || currentCustomer.fullName || "",
+      phone: current.phone || currentCustomer.phone || "",
+      email: current.email || currentCustomer.email || "",
+      city: current.city || currentCustomer.city || "",
+      carBrand: current.carBrand || currentCustomer.carBrand || "",
+      carModel: current.carModel || currentCustomer.carModel || "",
+      year: current.year || currentCustomer.year || "",
+      vin: current.vin || currentCustomer.vin || "",
+    }));
+  }, [currentCustomer]);
 
   const summaryItems = useMemo(
     () =>
@@ -91,6 +112,22 @@ export default function CheckoutForm({ productCopies }) {
     if (!summaryItems.length) {
       navigateToRoute("cart");
       return;
+    }
+
+    if (!submittedOrderId) {
+      const paymentMethod =
+        target === "card" ? (cardGatewayReady && cardPaymentUrl ? "card" : "paymentLink") : target;
+      const order = createOrder({
+        fields,
+        items: summaryItems,
+        paymentMethod,
+        customerId: currentCustomer?.id || "",
+      });
+
+      if (order?.id) {
+        setSubmittedOrderId(order.id);
+        clearCart();
+      }
     }
 
     if (target === "email") {

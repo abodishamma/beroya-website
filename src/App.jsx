@@ -1,6 +1,10 @@
 import HomePage from "./pages/HomePage";
+import AccountPage from "./pages/AccountPage";
+import AdminPage from "./pages/AdminPage";
 import CartToast from "./components/shop/CartToast";
+import { AuthProvider } from "./context/AuthProvider";
 import { CartProvider } from "./context/CartProvider";
+import { CommerceProvider } from "./context/CommerceProvider";
 import { LanguageProvider } from "./context/LanguageProvider";
 import About from "./sections/About";
 import Contact from "./sections/Contact";
@@ -23,6 +27,8 @@ function RoutedSite() {
     product: <Shop mode="detail" productId={route.productId} />,
     cart: <Shop mode="cart" />,
     checkout: <Shop mode="checkout" />,
+    account: <AccountPage />,
+    admin: <AdminPage />,
     about: <About />,
     technology: <Technology />,
     manufacturing: <Manufacturing />,
@@ -48,9 +54,13 @@ function RoutedSite() {
 export default function App() {
   return (
     <LanguageProvider>
-      <CartProvider>
-        <RoutedSite />
-      </CartProvider>
+      <AuthProvider>
+        <CommerceProvider>
+          <CartProvider>
+            <RoutedSite />
+          </CartProvider>
+        </CommerceProvider>
+      </AuthProvider>
     </LanguageProvider>
   );
 }

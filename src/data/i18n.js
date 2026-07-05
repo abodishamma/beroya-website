@@ -338,12 +338,16 @@ dictionary.en.nav.categories = "Categories";
 dictionary.en.nav.search = "Search";
 dictionary.en.nav.cart = "Cart";
 dictionary.en.nav.checkout = "Checkout";
+dictionary.en.nav.account = "Account";
+dictionary.en.nav.admin = "Admin";
 
 dictionary.ar.nav.shop = "المتجر";
 dictionary.ar.nav.categories = "الفئات";
 dictionary.ar.nav.search = "البحث";
 dictionary.ar.nav.cart = "السلة";
 dictionary.ar.nav.checkout = "إتمام الطلب";
+dictionary.ar.nav.account = "الحساب";
+dictionary.ar.nav.admin = "الأدمن";
 
 dictionary.en.shop = {
   kicker: "BEROYA Online Store",
@@ -752,5 +756,199 @@ dictionary.ar.checkout = {
     year: "2022",
     vin: "رقم الهيكل / VIN اختياري",
     notes: "اكتب الكميات المطلوبة أو ملاحظات التوافق أو درجة الاستعجال.",
+  },
+};
+
+dictionary.en.account = {
+  kicker: "Customer Account",
+  title: "Your BEROYA garage profile.",
+  description:
+    "Save vehicle details, track order requests and move faster when you need the right component.",
+  createAccount: "Create account",
+  signIn: "Sign in",
+  profile: "Customer profile",
+  orders: "Recent orders",
+  logout: "Log out",
+  shopNow: "Shop components",
+  adminAccess: "Admin portal",
+  noOrders: "No orders yet. Add products to the cart and submit a checkout request.",
+  notProvided: "Not provided",
+  noVehicle: "No vehicle saved",
+  fields: {
+    fullName: "Full name",
+    phone: "Phone",
+    email: "Email",
+    city: "City",
+    carBrand: "Car brand",
+    carModel: "Car model",
+    year: "Year",
+    vin: "VIN optional",
+  },
+  placeholders: {
+    fullName: "Customer name",
+    phone: "+971 50 123 4567",
+    email: "name@example.com",
+    city: "Dubai",
+    carBrand: "Toyota, BMW, Mercedes...",
+    carModel: "Camry, X5, C-Class...",
+    year: "2022",
+    vin: "Optional VIN / chassis",
+  },
+  messages: {
+    missing: "Please add your name and email.",
+    registered: "Account created successfully.",
+    updated: "Account updated and signed in.",
+    notFound: "No matching customer account was found.",
+    signedIn: "Signed in successfully.",
+    signedOut: "Signed out.",
+    adminDenied: "Admin access code is incorrect.",
+    adminSignedIn: "Admin signed in successfully.",
+  },
+};
+
+dictionary.ar.account = {
+  kicker: "حساب العميل",
+  title: "ملفك لدى BEROYA.",
+  description: "احفظ بيانات سيارتك، وتابع طلباتك، واطلب القطعة المناسبة بسرعة أكبر.",
+  createAccount: "إنشاء حساب",
+  signIn: "تسجيل الدخول",
+  profile: "ملف العميل",
+  orders: "آخر الطلبات",
+  logout: "تسجيل الخروج",
+  shopNow: "تسوق القطع",
+  adminAccess: "لوحة الأدمن",
+  noOrders: "لا توجد طلبات بعد. أضف منتجات للسلة وأرسل طلب إتمام الشراء.",
+  notProvided: "غير مضاف",
+  noVehicle: "لا توجد سيارة محفوظة",
+  fields: {
+    fullName: "الاسم الكامل",
+    phone: "رقم الهاتف",
+    email: "البريد الإلكتروني",
+    city: "المدينة",
+    carBrand: "ماركة السيارة",
+    carModel: "موديل السيارة",
+    year: "السنة",
+    vin: "رقم VIN اختياري",
+  },
+  placeholders: {
+    fullName: "اسم العميل",
+    phone: "+971 50 123 4567",
+    email: "name@example.com",
+    city: "دبي",
+    carBrand: "تويوتا، BMW، مرسيدس...",
+    carModel: "كامري، X5، C-Class...",
+    year: "2022",
+    vin: "رقم الهيكل / VIN اختياري",
+  },
+  messages: {
+    missing: "أضف الاسم والبريد الإلكتروني.",
+    registered: "تم إنشاء الحساب بنجاح.",
+    updated: "تم تحديث الحساب وتسجيل الدخول.",
+    notFound: "لم يتم العثور على حساب مطابق.",
+    signedIn: "تم تسجيل الدخول بنجاح.",
+    signedOut: "تم تسجيل الخروج.",
+    adminDenied: "رمز دخول الأدمن غير صحيح.",
+    adminSignedIn: "تم تسجيل دخول الأدمن بنجاح.",
+  },
+};
+
+dictionary.en.admin = {
+  kicker: "Admin Operations",
+  title: "Inventory and sales control room.",
+  description:
+    "Monitor product stock, reserved quantities, incoming orders and sales status from one premium operations dashboard.",
+  loginTitle: "Admin sign in",
+  loginDescription: "Access the operations dashboard for orders, stock and sales monitoring.",
+  demoAccess: "Demo access code: {code}",
+  signIn: "Enter dashboard",
+  signedIn: "Admin workspace",
+  secureWorkspace: "Inventory, orders and sales overview",
+  resetDemo: "Reset demo data",
+  inventory: "Inventory",
+  sales: "Sales orders",
+  fields: {
+    email: "Admin email",
+    code: "Access code",
+  },
+  placeholders: {
+    code: "Enter access code",
+  },
+  metrics: {
+    revenue: "Revenue",
+    orders: "Orders",
+    lowStock: "Low stock",
+    unitsSold: "Units sold",
+  },
+  table: {
+    product: "Product",
+    available: "Available",
+    reserved: "Reserved",
+    sold: "Sold",
+    stock: "Stock",
+    status: "Status",
+  },
+  status: {
+    inquiry: "Inquiry",
+    paymentPending: "Payment pending",
+    processing: "Processing",
+    paid: "Paid",
+    fulfilled: "Fulfilled",
+    cancelled: "Cancelled",
+  },
+  payment: {
+    card: "Card gateway",
+    paymentLink: "Payment link",
+    whatsapp: "WhatsApp",
+    email: "Email inquiry",
+  },
+};
+
+dictionary.ar.admin = {
+  kicker: "إدارة المتجر",
+  title: "لوحة مراقبة المخزون والمبيعات.",
+  description: "راقب المخزون، الكميات المحجوزة، الطلبات الجديدة وحالة البيع من لوحة واحدة فخمة.",
+  loginTitle: "دخول الأدمن",
+  loginDescription: "ادخل إلى لوحة العمليات لمتابعة الطلبات والمخزون والمبيعات.",
+  demoAccess: "رمز الدخول التجريبي: {code}",
+  signIn: "دخول اللوحة",
+  signedIn: "مساحة الأدمن",
+  secureWorkspace: "نظرة على المخزون والطلبات والمبيعات",
+  resetDemo: "إعادة بيانات التجربة",
+  inventory: "المخزون",
+  sales: "طلبات البيع",
+  fields: {
+    email: "بريد الأدمن",
+    code: "رمز الدخول",
+  },
+  placeholders: {
+    code: "أدخل رمز الدخول",
+  },
+  metrics: {
+    revenue: "الإيرادات",
+    orders: "الطلبات",
+    lowStock: "مخزون منخفض",
+    unitsSold: "قطع مباعة",
+  },
+  table: {
+    product: "المنتج",
+    available: "المتاح",
+    reserved: "المحجوز",
+    sold: "المباع",
+    stock: "المخزون",
+    status: "الحالة",
+  },
+  status: {
+    inquiry: "استفسار",
+    paymentPending: "بانتظار الدفع",
+    processing: "قيد المعالجة",
+    paid: "مدفوع",
+    fulfilled: "تم التنفيذ",
+    cancelled: "ملغي",
+  },
+  payment: {
+    card: "بوابة البطاقة",
+    paymentLink: "رابط دفع",
+    whatsapp: "واتساب",
+    email: "طلب بالبريد",
   },
 };

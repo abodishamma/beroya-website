@@ -6269,6 +6269,28 @@ a {
   font-size: 10px;
 }
 
+.nav__account {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(244, 243, 238, 0.68);
+  background: rgba(255, 255, 255, 0.018);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 9px;
+  font-weight: 750;
+}
+
+.nav__account.is-active,
+.nav__account:hover {
+  border-color: rgba(213, 178, 115, 0.46);
+  color: var(--white);
+}
+
 .nav__cart.is-bumping {
   animation: cart-bump 0.78s cubic-bezier(0.22, 1, 0.36, 1);
   border-color: rgba(213, 178, 115, 0.82);
@@ -6768,7 +6790,9 @@ a {
 
 .product-detail,
 .cart-page,
-.checkout {
+.checkout,
+.account-page,
+.admin-page {
   margin-top: clamp(44px, 7vw, 88px);
   padding-top: clamp(42px, 6vw, 70px);
   border-top: 1px solid rgba(255, 255, 255, 0.09);
@@ -6806,7 +6830,9 @@ a {
 
 .product-detail__content h2,
 .cart-page__heading h2,
-.checkout__heading h2 {
+.checkout__heading h2,
+.account-hero h1,
+.admin-hero h1 {
   margin: 16px 0 18px;
   color: var(--white);
   letter-spacing: -0.04em;
@@ -6817,7 +6843,9 @@ a {
 
 .product-detail__content > p,
 .cart-page__heading p,
-.checkout__heading p {
+.checkout__heading p,
+.account-hero p,
+.admin-hero p {
   max-width: 650px;
   margin: 0 0 24px;
   color: rgba(244, 243, 238, 0.66);
@@ -7188,9 +7216,426 @@ a {
   opacity: 0.48;
 }
 
+.account-dashboard,
+.account-auth,
+.admin-login,
+.admin-toolbar,
+.admin-metrics,
+.admin-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.account-dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+}
+
+.account-panel,
+.account-auth,
+.admin-login,
+.admin-panel,
+.admin-toolbar,
+.admin-metrics article {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    radial-gradient(circle at 80% 0%, rgba(213, 178, 115, 0.08), transparent 34%),
+    linear-gradient(145deg, rgba(18, 19, 18, 0.88), rgba(6, 7, 7, 0.96));
+  box-shadow: 0 24px 74px rgba(0, 0, 0, 0.26);
+}
+
+.account-panel {
+  padding: clamp(18px, 2vw, 24px);
+}
+
+.account-panel__top,
+.admin-panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.account-panel__top span,
+.admin-panel__top span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.account-panel__top small,
+.admin-panel__top small {
+  display: grid;
+  min-width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(213, 178, 115, 0.26);
+  color: var(--gold-light);
+}
+
+.account-profile-card {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid rgba(213, 178, 115, 0.14);
+  background:
+    linear-gradient(135deg, rgba(213, 178, 115, 0.08), transparent),
+    rgba(255, 255, 255, 0.02);
+}
+
+.account-profile-card strong {
+  color: var(--white);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 430;
+  letter-spacing: -0.035em;
+}
+
+.account-profile-card span,
+.account-profile-card small,
+.account-empty,
+.admin-order p,
+.admin-login p {
+  color: rgba(244, 243, 238, 0.62);
+  line-height: 1.7;
+}
+
+.account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.account-orders {
+  display: grid;
+  gap: 10px;
+}
+
+.account-order,
+.admin-order {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.account-order {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+}
+
+.account-order div {
+  display: grid;
+  gap: 5px;
+}
+
+.account-order strong,
+.admin-order strong {
+  color: var(--white);
+}
+
+.account-order span,
+.admin-order span,
+.admin-table small {
+  color: rgba(244, 243, 238, 0.54);
+  font-size: 11px;
+}
+
+.account-auth {
+  max-width: 860px;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.account-auth__switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.account-auth__switch button {
+  min-height: 46px;
+  border: 1px solid rgba(213, 178, 115, 0.18);
+  color: rgba(244, 243, 238, 0.62);
+  background: rgba(255, 255, 255, 0.018);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.account-auth__switch button.is-active {
+  color: #070707;
+  background: var(--gold);
+}
+
+.account-form,
+.admin-login {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.admin-login {
+  max-width: 780px;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.admin-login > div,
+.account-form__message,
+.account-form .button,
+.admin-login__hint,
+.admin-login .button {
+  grid-column: 1 / -1;
+}
+
+.admin-login svg {
+  color: var(--gold-light);
+}
+
+.admin-login strong {
+  display: block;
+  margin: 12px 0 6px;
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 520;
+}
+
+.account-form label,
+.admin-login label {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.024);
+}
+
+.account-form span,
+.admin-login label span {
+  color: rgba(213, 178, 115, 0.76);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 8px;
+  font-weight: 850;
+}
+
+.account-form input,
+.admin-login input,
+.admin-order select,
+.admin-stock-control input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: var(--white);
+  background: transparent;
+}
+
+.account-form input,
+.admin-login input {
+  min-height: 34px;
+}
+
+.account-form__message,
+.admin-login__hint {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid rgba(213, 178, 115, 0.16);
+  color: rgba(244, 243, 238, 0.64);
+  background: rgba(213, 178, 115, 0.045);
+}
+
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.admin-toolbar > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-toolbar span {
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 9px;
+  font-weight: 850;
+}
+
+.admin-toolbar strong {
+  color: var(--white);
+  font-weight: 520;
+}
+
+.admin-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-metrics article {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+}
+
+.admin-metrics svg {
+  color: var(--gold-light);
+}
+
+.admin-metrics span {
+  color: rgba(244, 243, 238, 0.56);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 9px;
+  font-weight: 850;
+}
+
+.admin-metrics strong {
+  color: var(--white);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 430;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.admin-panel {
+  overflow: hidden;
+  padding: clamp(16px, 2vw, 22px);
+}
+
+.admin-table {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-table__head,
+.admin-table > div:not(.admin-table__head) {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.5fr) 0.5fr 0.5fr 0.45fr minmax(116px, 0.75fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-table__head {
+  padding: 0 12px 10px;
+  color: rgba(213, 178, 115, 0.74);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 8px;
+  font-weight: 850;
+}
+
+.admin-table > div:not(.admin-table__head) {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.admin-table > div.is-low {
+  border-color: rgba(213, 178, 115, 0.38);
+  background: rgba(213, 178, 115, 0.055);
+}
+
+.admin-table strong {
+  display: block;
+  color: var(--white);
+  font-size: 12px;
+}
+
+.admin-stock-control {
+  display: grid;
+  grid-template-columns: 30px minmax(44px, 1fr) 30px;
+  align-items: center;
+  border: 1px solid rgba(213, 178, 115, 0.18);
+}
+
+.admin-stock-control button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  color: var(--gold-light);
+  background: rgba(255, 255, 255, 0.025);
+  cursor: pointer;
+}
+
+.admin-stock-control input {
+  text-align: center;
+  font-size: 12px;
+}
+
+.admin-orders {
+  display: grid;
+  gap: 10px;
+  max-height: 820px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+[dir="rtl"] .admin-orders {
+  padding-right: 0;
+  padding-left: 4px;
+}
+
+.admin-order {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.admin-order__top,
+.admin-order__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-order__top div {
+  display: grid;
+  gap: 5px;
+}
+
+.admin-order p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.admin-order select {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(213, 178, 115, 0.18);
+  background: #080909;
+  cursor: pointer;
+}
+
 @media (min-width: 1101px) {
   .shop,
-  .products {
+  .products,
+  .account-page,
+  .admin-page {
     margin-left: 274px;
   }
 }
@@ -7202,7 +7647,9 @@ a {
 
   .product-detail,
   .cart-page__layout,
-  .checkout__layout {
+  .checkout__layout,
+  .account-dashboard,
+  .admin-grid {
     grid-template-columns: 1fr;
   }
 
@@ -7221,14 +7668,19 @@ a {
   .shop-filters,
   .shop-grid,
   .product-detail__facts,
-  .checkout-form {
+  .checkout-form,
+  .account-form,
+  .admin-login,
+  .admin-metrics {
     grid-template-columns: 1fr;
   }
 
   .shop__hero h2,
   .product-detail__content h2,
   .cart-page__heading h2,
-  .checkout__heading h2 {
+  .checkout__heading h2,
+  .account-hero h1,
+  .admin-hero h1 {
     font-size: clamp(29px, 8vw, 38px);
     line-height: 1.08;
   }
@@ -7286,6 +7738,48 @@ a {
 
   .mobile-nav nav a {
     letter-spacing: 0.04em;
+  }
+
+  .nav__account {
+    display: none;
+  }
+
+  .account-auth,
+  .account-panel,
+  .admin-login,
+  .admin-panel,
+  .admin-toolbar {
+    padding: 16px;
+  }
+
+  .account-panel__top,
+  .admin-toolbar,
+  .admin-order__top,
+  .admin-order__actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .account-auth__switch,
+  .account-order {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table__head {
+    display: none;
+  }
+
+  .admin-table > div:not(.admin-table__head) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-table > div:not(.admin-table__head) > span:first-child,
+  .admin-stock-control {
+    grid-column: 1 / -1;
+  }
+
+  .admin-orders {
+    max-height: none;
   }
 
   .cart-toast {
