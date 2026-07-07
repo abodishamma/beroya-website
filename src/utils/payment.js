@@ -10,7 +10,7 @@ function safeAppend(url, key, value) {
   }
 }
 
-export function createCardPaymentUrl({ fields, items, total, language }) {
+export function createCardPaymentUrl({ amount, fields, items, total, language }) {
   if (!cardPaymentGatewayUrl) return "";
 
   try {
@@ -31,6 +31,8 @@ export function createCardPaymentUrl({ fields, items, total, language }) {
     safeAppend(url, "vin", fields.vin);
     safeAppend(url, "notes", fields.notes);
     safeAppend(url, "items", orderLines.join(" | "));
+    safeAppend(url, "amount", amount);
+    safeAppend(url, "currency", "AED");
     safeAppend(url, "total", total);
 
     return url.toString();

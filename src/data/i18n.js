@@ -660,10 +660,10 @@ dictionary.ar.cart = {
 };
 
 dictionary.en.checkout = {
-  kicker: "Checkout Inquiry",
-  title: "Send a fitment-ready order request.",
+  kicker: "Secure Checkout",
+  title: "Complete payment securely by card.",
   description:
-    "Share vehicle details so the BEROYA team can verify compatibility before confirming supply.",
+    "Enter your vehicle details, review the order, and continue to a certified card payment gateway.",
   customerInfo: "Customer information",
   orderSummary: "Order summary",
   whatsappIntro: "Hello BEROYA, I would like to submit this order inquiry:",
@@ -676,12 +676,15 @@ dictionary.en.checkout = {
     cardMethod: "Card payment",
     acceptedCards: "Visa / Mastercard / Apple Pay ready",
     gatewayReady: "Gateway connected",
-    gatewayPending: "Gateway link pending",
+    gatewayPending: "Payment gateway not connected",
     note:
       "Card details are never collected on this website. Customers are redirected to a certified payment provider.",
     secure: "Secure checkout prepared for card payment",
     payCard: "Pay securely by card",
-    requestLink: "Request secure card payment link",
+    requestLink: "Pay securely by card",
+    gatewayRequired: "Live card payments require a certified payment gateway.",
+    connectGateway:
+      "Connect Stripe, PayTabs, Tap, or another certified gateway using VITE_CARD_PAYMENT_URL before accepting real card payments.",
     linkRequestIntro:
       "Hello BEROYA, I would like to receive a secure card payment link for this order:",
   },
@@ -710,10 +713,10 @@ dictionary.en.checkout = {
 };
 
 dictionary.ar.checkout = {
-  kicker: "استفسار إتمام الطلب",
-  title: "أرسل طلباً جاهزاً للتحقق من التوافق.",
+  kicker: "دفع آمن",
+  title: "أكمل الدفع بأمان عبر البطاقة.",
   description:
-    "شارك بيانات السيارة حتى يتمكن فريق BEROYA من تأكيد التوافق قبل اعتماد التوريد.",
+    "أدخل بيانات السيارة، راجع الطلب، ثم انتقل إلى بوابة دفع معتمدة لإتمام الدفع بالبطاقة.",
   customerInfo: "بيانات العميل",
   orderSummary: "ملخص الطلب",
   whatsappIntro: "مرحباً BEROYA، أود إرسال استفسار الطلب التالي:",
@@ -726,12 +729,15 @@ dictionary.ar.checkout = {
     cardMethod: "الدفع بالبطاقة",
     acceptedCards: "جاهز لبطاقات Visa / Mastercard / Apple Pay",
     gatewayReady: "بوابة الدفع متصلة",
-    gatewayPending: "رابط بوابة الدفع غير مضاف بعد",
+    gatewayPending: "بوابة الدفع غير مربوطة بعد",
     note:
       "لا يتم جمع بيانات البطاقة داخل الموقع. يتم تحويل العميل إلى مزود دفع معتمد لإتمام العملية.",
     secure: "Checkout آمن ومجهز للدفع بالبطاقة",
     payCard: "ادفع بأمان بالبطاقة",
-    requestLink: "طلب رابط دفع آمن بالبطاقة",
+    requestLink: "ادفع بأمان بالبطاقة",
+    gatewayRequired: "الدفع الحقيقي بالبطاقة يحتاج بوابة دفع معتمدة.",
+    connectGateway:
+      "اربط Stripe أو PayTabs أو Tap أو أي بوابة دفع معتمدة عبر VITE_CARD_PAYMENT_URL قبل قبول دفعات حقيقية.",
     linkRequestIntro:
       "مرحباً BEROYA، أود الحصول على رابط دفع آمن بالبطاقة لهذا الطلب:",
   },

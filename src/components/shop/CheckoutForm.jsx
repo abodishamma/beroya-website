@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { CreditCard, ExternalLink, LockKeyhole, MessageCircle, Send, ShieldCheck } from "lucide-react";
+import { CreditCard, ExternalLink, LockKeyhole, ShieldCheck } from "lucide-react";
 import { formatPrice } from "../../utils/formatters";
 import { createCardPaymentUrl, isCardPaymentReady } from "../../utils/payment";
-import { createOrderWhatsAppUrl, createPaymentLinkWhatsAppUrl } from "../../utils/whatsapp";
 import { navigateToRoute } from "../../utils/routes";
 import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
@@ -28,6 +27,7 @@ export default function CheckoutForm({ productCopies }) {
   const { clearCart, enrichedItems, subtotal } = useCart();
   const [fields, setFields] = useState(initialFields);
   const [submittedOrderId, setSubmittedOrderId] = useState("");
+  const [paymentMessage, setPaymentMessage] = useState("");
 
   useEffect(() => {
     if (!currentCustomer) return;
@@ -59,68 +59,37 @@ export default function CheckoutForm({ productCopies }) {
   const total = formatPrice(subtotal, language);
   const cardGatewayReady = isCardPaymentReady();
   const cardPaymentUrl = createCardPaymentUrl({
+    amount: subtotal,
     fields,
     items: summaryItems,
     language,
     total,
   });
-  const whatsappUrl = createOrderWhatsAppUrl({
-    content,
-    fields,
-    items: summaryItems,
-    total,
-  });
-  const paymentLinkUrl = createPaymentLinkWhatsAppUrl({
-    content,
-    fields,
-    items: summaryItems,
-    total,
-  });
-
-  const emailUrl = `mailto:info@beroyaauto.com?subject=${encodeURIComponent(
-    content.checkout.emailSubject,
-  )}&body=${encodeURIComponent(
-    [
-      content.checkout.customerInfo,
-      `${content.checkout.fields.fullName}: ${fields.fullName}`,
-      `${content.checkout.fields.phone}: ${fields.phone}`,
-      `${content.checkout.fields.email}: ${fields.email}`,
-      `${content.checkout.fields.city}: ${fields.city}`,
-      `${content.checkout.fields.carBrand}: ${fields.carBrand}`,
-      `${content.checkout.fields.carModel}: ${fields.carModel}`,
-      `${content.checkout.fields.year}: ${fields.year}`,
-      `${content.checkout.fields.vin}: ${fields.vin || "-"}`,
-      `${content.checkout.fields.notes}: ${fields.notes || "-"}`,
-      "",
-      content.checkout.orderSummary,
-      ...summaryItems.map(
-        ({ product, copy, quantity, lineTotal }) =>
-          `${copy.name} x ${quantity} — ${product.sku} — ${lineTotal}`,
-      ),
-      `${content.cart.subtotal}: ${total}`,
-    ].join("\n"),
-  )}`;
 
   const updateField = (field, value) => {
     setFields((current) => ({ ...current, [field]: value }));
+    if (paymentMessage) setPaymentMessage("");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const target = event.nativeEvent?.submitter?.dataset?.target || "card";
+    setPaymentMessage("");
 
     if (!summaryItems.length) {
       navigateToRoute("cart");
       return;
     }
 
+    if (!cardGatewayReady || !cardPaymentUrl) {
+      setPaymentMessage(content.checkout.payment.connectGateway);
+      return;
+    }
+
     if (!submittedOrderId) {
-      const paymentMethod =
-        target === "card" ? (cardGatewayReady && cardPaymentUrl ? "card" : "paymentLink") : target;
       const order = createOrder({
         fields,
         items: summaryItems,
-        paymentMethod,
+        paymentMethod: "card",
         customerId: currentCustomer?.id || "",
       });
 
@@ -130,22 +99,7 @@ export default function CheckoutForm({ productCopies }) {
       }
     }
 
-    if (target === "email") {
-      window.location.href = emailUrl;
-      return;
-    }
-
-    if (target === "whatsapp") {
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      return;
-    }
-
-    if (cardGatewayReady && cardPaymentUrl) {
-      window.location.href = cardPaymentUrl;
-      return;
-    }
-
-    window.open(paymentLinkUrl, "_blank", "noopener,noreferrer");
+    window.location.href = cardPaymentUrl;
   };
 
   return (
@@ -204,6 +158,13 @@ export default function CheckoutForm({ productCopies }) {
               <LockKeyhole aria-hidden="true" size={15} />
               {content.checkout.payment.note}
             </p>
+
+            {!cardGatewayReady && (
+              <div className="payment-gateway-alert" role="status">
+                <strong>{content.checkout.payment.gatewayRequired}</strong>
+                <span>{content.checkout.payment.connectGateway}</span>
+              </div>
+            )}
           </div>
         </form>
 
@@ -232,35 +193,14 @@ export default function CheckoutForm({ productCopies }) {
             className={`button button--gold ${!summaryItems.length ? "is-disabled" : ""}`}
             type="submit"
             form="checkout-form"
-            data-target="card"
             disabled={!summaryItems.length}
           >
             <CreditCard aria-hidden="true" size={17} />
-            {cardGatewayReady ? content.checkout.payment.payCard : content.checkout.payment.requestLink}
+            {content.checkout.payment.payCard}
             {cardGatewayReady && <ExternalLink aria-hidden="true" size={14} />}
           </button>
 
-          <button
-            className="button button--outline"
-            type="submit"
-            form="checkout-form"
-            data-target="whatsapp"
-            disabled={!summaryItems.length}
-          >
-            <MessageCircle aria-hidden="true" size={17} />
-            {content.checkout.sendWhatsApp}
-          </button>
-
-          <button
-            className="button button--outline checkout-summary__email"
-            type="submit"
-            form="checkout-form"
-            data-target="email"
-            disabled={!summaryItems.length}
-          >
-            <Send aria-hidden="true" size={15} />
-            {content.checkout.saveInquiry}
-          </button>
+          {paymentMessage && <p className="checkout-payment-message">{paymentMessage}</p>}
         </aside>
       </div>
     </section>

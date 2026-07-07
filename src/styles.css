@@ -7202,6 +7202,31 @@ a {
   background: rgba(213, 178, 115, 0.045);
 }
 
+.payment-gateway-alert,
+.checkout-payment-message {
+  display: grid;
+  gap: 6px;
+  padding: 13px;
+  border: 1px solid rgba(213, 178, 115, 0.24);
+  color: rgba(244, 243, 238, 0.7);
+  background:
+    linear-gradient(135deg, rgba(213, 178, 115, 0.09), rgba(255, 255, 255, 0.018)),
+    rgba(255, 255, 255, 0.02);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.payment-gateway-alert strong {
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 9px;
+}
+
+.checkout-payment-message {
+  margin: 0;
+}
+
 .checkout-summary__email {
   opacity: 0.82;
 }
