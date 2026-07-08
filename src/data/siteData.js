@@ -19,7 +19,6 @@ import drivetrainImage from "../assets/reference-redesign/drivetrain-parts.webp"
 export const navigation = [
   { key: "home", page: "home", href: "#/" },
   { key: "shop", page: "shop", href: "#/shop" },
-  { key: "account", page: "account", href: "#/account" },
   { key: "about", page: "about", href: "#/about" },
   { key: "technology", page: "technology", href: "#/technology" },
   { key: "manufacturing", page: "manufacturing", href: "#/manufacturing" },
