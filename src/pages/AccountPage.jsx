@@ -20,7 +20,7 @@ const emptyCustomer = {
 
 export default function AccountPage() {
   const { content, language } = useLanguage();
-  const { authMessage, currentCustomer, loginCustomer, logout, registerCustomer } = useAuth();
+  const { authMessage, currentCustomer, hasAuthBackend, loginCustomer, logout, registerCustomer } = useAuth();
   const { orders } = useCommerce();
   const reduceMotion = useReducedMotion();
   const [mode, setMode] = useState("register");
@@ -37,15 +37,15 @@ export default function AccountPage() {
     setFields((current) => ({ ...current, [field]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (mode === "login") {
-      loginCustomer(fields.email, fields.phone);
+      await loginCustomer(fields.email);
       return;
     }
 
-    registerCustomer(fields);
+    await registerCustomer(fields);
   };
 
   return (
@@ -143,6 +143,10 @@ export default function AccountPage() {
             </div>
 
             <form className="account-form" onSubmit={handleSubmit}>
+              {!hasAuthBackend && content.account.messages.backendMissing && (
+                <p className="account-form__message">{content.account.messages.backendMissing}</p>
+              )}
+
               <label>
                 <span>{content.account.fields.email}</span>
                 <input
@@ -154,18 +158,16 @@ export default function AccountPage() {
                 />
               </label>
 
-              <label>
-                <span>{content.account.fields.phone}</span>
-                <input
-                  value={fields.phone}
-                  required={mode === "login"}
-                  placeholder={content.account.placeholders.phone}
-                  onChange={(event) => updateField("phone", event.target.value)}
-                />
-              </label>
-
               {mode === "register" && (
                 <>
+                  <label>
+                    <span>{content.account.fields.phone}</span>
+                    <input
+                      value={fields.phone}
+                      placeholder={content.account.placeholders.phone}
+                      onChange={(event) => updateField("phone", event.target.value)}
+                    />
+                  </label>
                   <label>
                     <span>{content.account.fields.fullName}</span>
                     <input
@@ -222,7 +224,7 @@ export default function AccountPage() {
                 <p className="account-form__message">{content.account.messages[authMessage]}</p>
               )}
 
-              <button className="button button--gold" type="submit">
+              <button className="button button--gold" type="submit" disabled={!hasAuthBackend}>
                 {mode === "register" ? content.account.createAccount : content.account.signIn}
                 <ArrowRight aria-hidden="true" size={15} />
               </button>
